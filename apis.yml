@@ -1,7 +1,11 @@
 aid: consolidated-edison
-url: https://raw.githubusercontent.com/api-evangelist/consolidated-edison/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/consolidated-edison/refs/heads/main/apis.yml
 modified: '2026-03-21'
 apis: []
 common:
   - type: Website
     url: https://www.consolidated-edison.com
+description: >-
+  Consolidated Edison is a holding company that, through its subsidiaries, provides
+  electric, gas, and steam service to customers in New York City and Westchester County.
