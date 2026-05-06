@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,140 +9,77 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Consolidated Edison
 providerId: consolidated-edison
-publisherName: Consolidated Edison
-serviceCategory: API
+publisherName: Consolidated Edison Company of New York, Inc.
+serviceCategory: Regulated Utility / Energy
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Energy
-  - Fortune 500
   - Green Button
-  - Natural Gas
-  - New York
-  - Steam
   - Utility
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the Consolidated Edison API surface. Provides a FOCUS-aligned
-  mapping for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+description: 'FOCUS-aligned FinOps for Consolidated Edison: regulated utility delivering energy under
+  NY PSC tariffs; programmatic surface (Green Button Connect My Data) is consent-based and not separately
+  billed. FinOps focuses on the underlying utility bill rather than API consumption.'
+notes: Con Edison's commercial product is regulated electric / gas / steam delivery, billed through utility
+  tariffs. The Green Button Connect feed itself is not metered or priced.
+sources:
+  - https://www.coned.com
+  - https://www.greenbuttondata.org
 billingModel:
-  pricingCategory: Usage-Based
+  pricingCategory: Regulated Utility Tariff
   billingFrequency: Monthly
   billingCurrency: USD
   chargeCategories:
     - Usage
-    - Purchase
     - Tax
-    - Credit
     - Adjustment
-  chargeFrequency: Recurring
 focusColumns:
   ServiceName: Consolidated Edison
-  ServiceCategory: Developer Tools / API
+  ServiceCategory: Regulated Utility / Energy
   ProviderName: Consolidated Edison
-  PublisherName: Consolidated Edison
-  InvoiceIssuerName: Consolidated Edison
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: Consolidated Edison Company of New York, Inc.
+  InvoiceIssuerName: Consolidated Edison Company of New York, Inc.
   BillingCurrency: USD
   ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: kwh_delivered
+    description: Electricity delivered, kilowatt-hours, per regulated tariff
+    unit: kWh
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+      - service_class
+      - rate_zone
+      - account
+  - name: therms_delivered
+    description: Natural gas delivered, therms
+    unit: therm
     aggregation: sum
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
+      - service_class
+      - account
+  - name: gbc_authorizations
+    description: Active Green Button Connect My Data authorizations (no charge)
+    unit: authorization
+    aggregation: count
     dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Green Button Connect My Data
-    baseURL: ''
-    tags:
-      - Energy
-      - Green Button
-      - OAuth2
-      - Smart Meter
-      - Usage Data
-    serviceName: Green Button Connect My Data
-    serviceCategory: API
-  - name: Green Button Download My Data
-    baseURL: ''
-    tags:
-      - CSV
-      - Energy
-      - Green Button
-      - Self-Service
-      - Usage Data
-      - XML
-    serviceName: Green Button Download My Data
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - third_party
+principles:
+  - name: Visibility
+    description: Use Con Edison's My Account portal and Green Button Download My Data exports to surface
+      consumption per meter; the GBC feed gives Third Parties customer-consented near-real-time usage.
+  - name: Allocation
+    description: Allocate energy spend by physical meter / account / facility; for multi-tenant facilities
+      use submetering and ESPI feeds per consenting customer.
+  - name: Optimization
+    description: Demand-response programs, time-of-use rate selection, energy-efficiency rebates, and
+      gas-vs-electric optimization are the primary cost levers; the GBC feed surfaces interval data needed
+      to drive these decisions.
+  - name: Accountability
+    description: Facilities / sustainability teams typically own utility spend; Third-Party authorized
+      services own the operational accuracy of the GBC integration.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

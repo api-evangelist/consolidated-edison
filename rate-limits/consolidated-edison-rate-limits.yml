@@ -4,93 +4,39 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Consolidated Edison
 providerId: consolidated-edison
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Energy
-  - Fortune 500
   - Green Button
-  - Natural Gas
-  - New York
-  - Steam
   - Utility
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Consolidated Edison API surface. Captures
-  per-tier quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values
-  to be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: Con Edison does not publish public rate-limit numbers for the Green Button Connect My Data
+  (NAESB ESPI) feed. ESPI implementations typically apply per-Third-Party throttling on the polling /
+  subscribe endpoints; specific values are governed by the GBC Third Party onboarding agreement.
+notes: Specific RPS/RPM thresholds for the GBC feed are not publicly published; reconcile via the GBC
+  Third Party onboarding documentation.
+sources:
+  - https://www.coned.com
+  - https://www.greenbuttondata.org
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Green Button Connect My Data
-      - Green Button Download My Data
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Green Button Connect My Data
-      - Green Button Download My Data
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Green Button Connect My Data
-      - Green Button Download My Data
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Green Button Connect My Data
-      - Green Button Download My Data
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Green Button Connect My Data
-      - Green Button Download My Data
+  - name: Green Button Connect Polling Limit
+    scope: third-party
+    metric: varies
+    limit: 'see GBC Third Party onboarding agreement'
+    notes: Polling cadence and per-Third-Party limits are negotiated through Con Edison's GBC onboarding
+      process per the NAESB ESPI framework.
 policies:
+  - name: ESPI Compliance
+    description: Clients must conform to the NAESB ESPI standard for authorization, retrieval, and revocation
+      semantics.
+  - name: Customer Consent
+    description: All access is consent-based — revoking customer authorization terminates the feed.
   - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+    description: Use exponential backoff with jitter on 429 / 503; honor Retry-After when present.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
