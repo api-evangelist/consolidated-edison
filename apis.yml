@@ -17,7 +17,7 @@ created: '2026-03-21'
 modified: '2026-04-28'
 position: Consumer
 specificationVersion: '0.19'
-x-type: company
+kind: company
 description: >-
   Consolidated Edison, Inc. (Con Edison) is a Fortune 500 holding company that,
   through its subsidiaries, provides electric, natural gas, and steam service
@@ -89,9 +89,9 @@ common:
     url: https://investor.conedison.com
   - type: Careers
     url: https://www.conedjobs.com
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.coned.com/en/about-us/privacy-statement
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.coned.com/en/about-us/terms-of-use
   - type: Support
     url: https://www.coned.com/en/contact-us
