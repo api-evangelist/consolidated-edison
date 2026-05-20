@@ -75,6 +75,10 @@ apis:
       one-shot analytics, audits, and migrating data into third-party tools
       without requiring an OAuth integration.
 common:
+  - type: GitHubOrganization
+    url: https://github.com/Con-Edison
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/con-edison
   - type: Website
     url: https://www.coned.com
   - type: Customer Portal
