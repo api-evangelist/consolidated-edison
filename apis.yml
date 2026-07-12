@@ -75,6 +75,8 @@ apis:
       one-shot analytics, audits, and migrating data into third-party tools
       without requiring an OAuth integration.
 common:
+  - type: DomainSecurity
+    url: security/consolidated-edison-domain-security.yml
   - type: GitHubOrganization
     url: https://github.com/Con-Edison
   - type: LinkedIn
