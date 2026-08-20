@@ -45,6 +45,12 @@ apis:
     tags:
       - Energy
       - Green Button
+      - Authentication
+      - Smart Meter
+      - Usage Data
+    tags_raw:
+      - Energy
+      - Green Button
       - OAuth2
       - Smart Meter
       - Usage Data
