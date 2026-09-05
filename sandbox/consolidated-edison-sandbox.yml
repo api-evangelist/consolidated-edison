@@ -1,0 +1,76 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+docs: >-
+  https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+available: true
+self_service: false
+gate: >-
+  The test environment is real and fully documented, but it is not
+  self-service. Third parties cannot reach it on their own: the onboarding
+  document states plainly that "third-party vendors cannot access the GBC test
+  environment" and that Con Edison's GBC technical onboarding team drives
+  customer-authorization testing. Credentials arrive by email after the
+  registration form and Data Security Agreement are complete.
+environments:
+  - name: test
+    api_base: https://apit.coned.com/gbc/espi/1_1
+    token_endpoint: https://apit.coned.com/gbc/espi/1_1/oauth/token
+    authorization_base: https://uat10.coned.com/en/
+    authorization_base_oru: https://uat10.oru.com/en/
+    reachable_publicly: >-
+      apit.coned.com resolves and answers (404 on unrouted paths, 401 on
+      /resource/ReadServiceStatus, probed 2026-09-05). uat10.coned.com did not
+      answer from the public internet on 2026-09-05.
+  - name: production
+    api_base: https://api.coned.com/gbc/espi/1_1
+    token_endpoint: https://api.coned.com/gbc/espi/1_1/oauth/Token
+    authorization_base: https://www.coned.com/en/
+    authorization_base_oru: https://www.oru.com/en/
+    note: >-
+      "We will not be doing any customer authorization testing in production."
+test_vs_live:
+  separation: separate hostnames (apit. vs api., uat10. vs www.)
+  key_prefixes: none published
+  credentials: >-
+    Distinct client_id / client_secret / Registration Access Token per
+    environment, issued by Con Edison after the environment-specific
+    registration form is submitted.
+tooling:
+  - kind: Swagger definition
+    name: DCX GBC API V2
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json
+    note: >-
+      Publicly downloadable (SAS-signed link published in the onboarding
+      document, valid to 2031-08-29). Con Edison suggests rendering it in
+      https://editor.swagger.io. Saved to
+      openapi/_original/consolidated-edison-green-button-connect-openapi.json.
+  - kind: Postman collection
+    name: GBC Certification Third party V3.3
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/postman-collection.json
+    folders: [Token API, Registration, Authorization, Data Exchange]
+  - kind: Postman environment
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/postman-environment.json
+  - kind: Registration form
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/share_my_data_registration_form.xlsx
+  - kind: Mock customer authorization application
+    url: null
+    note: >-
+      "Third-party vendors can request a mock customer authorization
+      application code via an email to Con Edison GBC technical onboarding
+      team (dlsharemydatatech@coned.com)." Not published for download.
+test_values:
+  published: false
+  note: >-
+    Con Edison publishes NO magic test identifiers, test account numbers, test
+    meter serials or synthetic subscription ids. Test data is provisioned per
+    third party by the onboarding team. Nothing is invented here.
+requirements:
+  - All third-party URLs in the registration form must be reachable from the Con Edison network.
+  - All third-party endpoints must support TLS 1.2 or higher.
+  - Completed API test results must be sent to the GBC technical onboarding team for review.

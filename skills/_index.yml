@@ -1,0 +1,48 @@
+generated: '2026-09-05'
+method: generated
+source: >-
+  openapi/consolidated-edison-green-button-connect-openapi.yml, grounded in Con
+  Edison's Green Button Connect Third-Party Technical Onboarding Document v4.4
+  and Share My Data FAQ. Every operationId referenced was grepped from the
+  published specification.
+note: >-
+  Con Edison publishes no AGENTS.md and no skill files of its own. These are
+  API Evangelist-authored operating instructions over the provider's real,
+  published contract.
+skills:
+  - file: consolidated-edison-authorize-customer.md
+    name: Authorize a Con Edison customer and mint Green Button tokens
+    api: openapi/consolidated-edison-green-button-connect-openapi.yml
+    operations:
+      - Token
+      - Get all Third Party Authorizations
+      - Get Third Party Authorization by ID
+      - getThirdPartyApplicationById
+  - file: consolidated-edison-pull-interval-usage.md
+    name: Pull interval energy usage for an authorized Con Edison customer
+    api: openapi/consolidated-edison-green-button-connect-openapi.yml
+    operations:
+      - getAllUsagePointsBySubscription
+      - getAllMeterReadingsForUsagePointInSubscription
+      - getAllIntervalBlocksForUsagePointMeterReadingInSubscription
+      - getAllReadingTypes
+      - getLocalTimeParameters
+      - getAllElectricPowerUsageSummaries
+  - file: consolidated-edison-batch-retrieval.md
+    name: Retrieve Con Edison Green Button data in batch
+    api: openapi/consolidated-edison-green-button-connect-openapi.yml
+    operations:
+      - getAllUsageDataInBatch
+      - getAllUsageDataForSubscriptionInBatch
+      - getUsagePointBySubscriptionInBatch
+      - getCustomerInformationInBatch
+  - file: consolidated-edison-map-retail-customer.md
+    name: Map Con Edison subscriptions to real accounts, agreements and meters
+    api: openapi/consolidated-edison-green-button-connect-openapi.yml
+    operations:
+      - getCustomerInformationBySubscription
+      - getCustomerAccountInSubscription
+      - getCustomerAgreementByAccountIdInSubscription
+      - getAllServiceLocationByCustomerAgreementIdAndAccountIdInSubscription
+      - getAllMetersForServiceLocationInSubscription
+      - getMeterBySerialNumberId

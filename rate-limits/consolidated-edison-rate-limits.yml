@@ -4,42 +4,108 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Consolidated Edison
 providerId: consolidated-edison
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
+modified: '2026-09-05'
+generated: '2026-09-05'
+method: searched
+source: >-
+  https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+docs: >-
+  https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+reconciled: true
 tags:
   - Energy
   - Green Button
   - Utility
   - Rate Limiting
-description: Con Edison does not publish public rate-limit numbers for the Green Button Connect My Data
-  (NAESB ESPI) feed. ESPI implementations typically apply per-Third-Party throttling on the polling /
-  subscribe endpoints; specific values are governed by the GBC Third Party onboarding agreement.
-notes: Specific RPS/RPM thresholds for the GBC feed are not publicly published; reconcile via the GBC
-  Third Party onboarding documentation.
-sources:
-  - https://www.coned.com
-  - https://www.greenbuttondata.org
-responseCodes:
-  throttled: 429
-  serviceUnavailable: 503
+description: >-
+  Con Edison publishes exactly one numeric rate limit for the Green Button
+  Connect (Share My Data) API, in section 3.6.3 of its Third-Party Technical
+  Onboarding Document v4.4: the token endpoint allows 50 calls per minute,
+  excluding the authorization_code flow, and no rate limit is applied to any
+  other endpoint. This replaces the earlier generated placeholder that said no
+  limits were published.
+notes: >-
+  Con Edison documents NO rate-limit response headers — no RateLimit-*, no
+  X-RateLimit-*, no Retry-After — and declares no 429 response on any operation
+  in its Swagger definition (only 200, 400 and 401 appear). An agent therefore
+  cannot discover its remaining budget at runtime; the only runtime signal is
+  the failure itself. The throughput constraint that actually bites in practice
+  is not the token limit but batch assembly time and the 2-day batch collection
+  window.
+limit_count: 2
 limits:
-  - name: Green Button Connect Polling Limit
-    scope: third-party
-    metric: varies
-    limit: 'see GBC Third Party onboarding agreement'
-    notes: Polling cadence and per-Third-Party limits are negotiated through Con Edison's GBC onboarding
-      process per the NAESB ESPI framework.
+  - name: Token endpoint
+    scope: per-third-party (client credentials)
+    endpoint: POST /gbc/espi/1_1/oauth/Token
+    metric: requests
+    limit: 50
+    window: 1 minute
+    burst: null
+    applies_to:
+      - grant_type=client_credentials
+      - grant_type=refresh_token
+    excludes:
+      - grant_type=authorization_code
+    source_quote: >-
+      "Rate limiting is in place for the token endpoint (excluding
+      authorization_code flow), and it will only allow 50 token API calls within
+      one minute."
+    mitigation: >-
+      Cache the access token for its full 60-minute life and reuse it for every
+      call against the same subscription. Minting a token per request will hit
+      this limit at 51 requests per minute.
+  - name: All ESPI resource endpoints
+    scope: per-third-party
+    endpoint: /gbc/espi/1_1/resource/*
+    metric: requests
+    limit: none published
+    window: null
+    source_quote: >-
+      "For all other endpoints, no rate limit is in place currently."
+    note: >-
+      "Currently" is Con Edison's word. No commitment is published, so this can
+      change without notice and without a header to detect it.
+responseHeaders: []
+responseHeadersNote: >-
+  None published. Not declared in the Swagger definition and not mentioned in
+  the onboarding document.
+responseCodes:
+  throttled: undocumented
+  note: >-
+    No 429 is declared on any of the 37 operations. The documented error surface
+    is 400 and 401 only.
+throughput_constraints:
+  - name: Batch assembly
+    detail: >-
+      Batch notifications typically arrive within one hour and can take up to 24
+      hours under heavy load. Duplicate batch requests submitted while one is
+      pending are rejected and do not shorten the wait.
+  - name: Batch collection window
+    detail: >-
+      An assembled batch response must be retrieved within 2 days of
+      notification or it is deleted. Within those 2 days, re-requesting the same
+      parameters returns the cached response.
+  - name: Batch response size
+    detail: Responses larger than 200 MB are chunked into multiple files.
+  - name: Authorization liveness
+    detail: >-
+      An authorization is revoked automatically if unused for 365 days, and a
+      refresh token expires after a year unused. This is an effective MINIMUM
+      call rate, not a maximum.
 policies:
-  - name: ESPI Compliance
-    description: Clients must conform to the NAESB ESPI standard for authorization, retrieval, and revocation
-      semantics.
-  - name: Customer Consent
-    description: All access is consent-based — revoking customer authorization terminates the feed.
-  - name: Backoff Strategy
-    description: Use exponential backoff with jitter on 429 / 503; honor Retry-After when present.
+  - name: Token caching
+    description: >-
+      Con Edison instructs third parties to cache the access token, store its
+      expiry timestamp, and reuse it for subsequent calls on the same
+      subscription until it expires.
+  - name: ESPI compliance
+    description: >-
+      Clients must conform to the NAESB ESPI standard for authorization,
+      retrieval and revocation semantics.
+  - name: Customer consent
+    description: >-
+      All access is consent-based — customer revocation terminates the feed
+      immediately.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

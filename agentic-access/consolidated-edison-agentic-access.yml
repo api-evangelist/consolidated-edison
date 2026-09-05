@@ -1,0 +1,398 @@
+generated: '2026-09-05'
+method: generated
+source: openapi/consolidated-edison-green-button-connect-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 37
+  by_action_class:
+    connected: 35
+    acting: 2
+  by_consequence:
+    read: 35
+    write: 2
+  human_in_the_loop_required: 0
+operations:
+- path: /resource/ApplicationInformation/{applicationInformationId}
+  method: get
+  operationId: getThirdPartyApplicationById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Authorization
+  method: get
+  operationId: Get all Third Party Authorizations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Authorization/{authorizationId}
+  method: get
+  operationId: Get Third Party Authorization by ID
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/ReadServiceStatus
+  method: get
+  operationId: readServiceStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /oauth/Token
+  method: post
+  operationId: Token
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /resource/Batch/Bulk/{bulkId}
+  method: get
+  operationId: getAllUsageDataInBatch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Batch/Subscription/{subscriptionId}
+  method: get
+  operationId: getAllUsageDataForSubscriptionInBatch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Batch/Subscription/{subscriptionId}/UsagePoint/{usagePointId}
+  method: get
+  operationId: getUsagePointBySubscriptionInBatch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Batch/RetailCustomer/{subscriptionId}
+  method: get
+  operationId: getCustomerInformationInBatch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock
+  method: get
+  operationId: getAllIntervalBlocksForUsagePointMeterReadingInSubscription
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock/{intervalBlockId}
+  method: get
+  operationId: getIntervalBlocksForUsagePointMeterReadingInSubscription
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/LocalTimeParameters
+  method: get
+  operationId: getLocalTimeParameters
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/LocalTimeParameters/{localTimeParameterId}
+  method: get
+  operationId: getLocalTimeParametersById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading
+  method: get
+  operationId: getAllMeterReadingsForUsagePointInSubscription
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}
+  method: get
+  operationId: getMeterReadingForUsagePointInSubscription
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/ReadingType
+  method: get
+  operationId: getAllReadingTypes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/ReadingType/{readingTypeId}
+  method: get
+  operationId: getReadingTypesById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/RealTime/Batch/Bulk/{bulkId}
+  method: get
+  operationId: getAllRealTimeUsageDataInBatch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/RealTime/Batch/Subscription/{subscriptionId}
+  method: get
+  operationId: getAllRealTimeUsageDataForSubscriptionInBatch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/RealTime/Batch/Subscription/{subscriptionId}/UsagePoint/{usagePointId}
+  method: get
+  operationId: getRealTimeUsagePointBySubscriptionInBatch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/RealTime/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock
+  method: get
+  operationId: getAllRealTimeIntervalBlocksForUsagePointMeterReadingInSubscription
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/RealTime/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock/{intervalBlockId}
+  method: get
+  operationId: getRealTimeIntervalBlockForUsagePointMeterReadingInSubscription
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/RealTime/ReadingType
+  method: get
+  operationId: getAllRealTimeReadingTypes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/RealTime/ReadingType/{readingTypeId}
+  method: get
+  operationId: getRealTimeReadingTypeById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Customer/{subscriptionId}
+  method: get
+  operationId: getCustomerInformationBySubscription
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Customer/{subscriptionId}/CustomerAccount
+  method: get
+  operationId: getCustomerAccountInSubscription
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Customer/{subscriptionId}/CustomerAccount/{accountId}
+  method: get
+  operationId: getCustomerAccountByAccountIdInSubscription
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement
+  method: get
+  operationId: getCustomerAgreementByAccountIdInSubscription
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement/{customerAgreementId}
+  method: get
+  operationId: getCustomerAgreementByCustomerAgreementId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement/{customerAgreementId}/ServiceLocation
+  method: get
+  operationId: getAllServiceLocationByCustomerAgreementIdAndAccountIdInSubscription
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement/{customerAgreementId}/ServiceLocation/{serviceLocationId}
+  method: get
+  operationId: getServiceLocationByServiceLocationId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement/{customerAgreementId}/ServiceLocation/{serviceLocationId}/Meter
+  method: get
+  operationId: getAllMetersForServiceLocationInSubscription
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement/{customerAgreementId}/ServiceLocation/{serviceLocationId}/Meter/{serialNumber}
+  method: get
+  operationId: getMeterBySerialNumberId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/UsageSummary
+  method: get
+  operationId: getAllElectricPowerUsageSummaries
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/UsageSummary/{usageSummaryId}
+  method: post
+  operationId: getAllElectricPowerUsageSummariesById
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /resource/Subscription/{subscriptionId}/UsagePoint
+  method: get
+  operationId: getAllUsagePointsBySubscription
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}
+  method: get
+  operationId: getUsagePointsForSubscription
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none

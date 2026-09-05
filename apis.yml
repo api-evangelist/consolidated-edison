@@ -1,15 +1,20 @@
 aid: consolidated-edison
 name: Consolidated Edison
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/consolidated-edison/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/consolidated-edison/refs/heads/main/apis.yml
 tags:
-  - Energy
-  - Fortune 500
-  - Green Button
-  - Natural Gas
-  - New York
-  - Steam
-  - Utility
+- AMI
+- Demand Response
+- ESPI
+- Energy
+- Fortune 500
+- Green Button
+- Interval Data
+- NAESB
+- Natural Gas
+- New York
+- OAuth2
+- Steam
+- Utility
 type: Index
 deliveryModel:
   model: saas
@@ -23,113 +28,183 @@ deliveryModel:
   generated: '2026-08-28'
   method: derived
 accessModel:
-  pricing: unknown
-  onboarding: unknown
+  pricing: free
+  onboarding: approval
   trial: false
   try_now: false
   public: false
-  label: Unknown
-  confidence: low
+  label: Free, approval-gated — Data Security Agreement plus 30-60 day technical onboarding
+  confidence: high
   source:
   - plans
-  generated: '2026-07-22'
-  method: derived
+  - docs
+  generated: '2026-09-05'
+  method: searched
+  evidence: 'https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+    — Share My Data FAQ General Q6: "There is no cost to use Share My Data."'
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/consolidated-edison.png
 access: 3rd-Party
 created: '2026-03-21'
-modified: '2026-04-28'
+modified: '2026-09-05'
 position: Consuming
 specificationVersion: '0.23'
 kind: company
-description: >-
-  Consolidated Edison, Inc. (Con Edison) is a Fortune 500 holding company that,
-  through its subsidiaries, provides electric, natural gas, and steam service
-  to customers in New York City and Westchester County. Con Edison does not
-  publish a general-purpose developer portal; programmatic data access is
-  delivered through the Green Button Connect My Data (GBC) program, which lets
-  authorized third parties retrieve customer energy usage data via the NAESB
-  Energy Services Provider Interface (ESPI) standard once the customer grants
-  consent through Con Edison's authorization portal.
+description: 'Consolidated Edison, Inc. (Con Edison) is a Fortune 500 investor-owned utility providing
+  electric, natural gas and steam service to New York City and Westchester County. It runs no general-purpose
+  developer portal; its one programmatic surface is Green Button Connect My Data - branded Share
+  My Data - a NAESB ESPI (REQ.21) / Green Button V3.3 API that lets a registered third party retrieve
+  a customer''s interval usage, billing and account data once that customer consents. The contract
+  is published: Con Edison links a Swagger 2.0 definition (DCX GBC API V2, 37 operations over UsagePoint,
+  MeterReading, IntervalBlock, ReadingType, UsageSummary, RetailCustomer, Batch and RealTime) and
+  a Postman collection from its public onboarding document; production base is https://api.coned.com/gbc/espi/1_1.
+  Access is free but not self-service - a Data Security Agreement and a 30-60 day onboarding come
+  first. Orange & Rockland runs the identical contract.'
 apis:
-  - aid: consolidated-edison:green-button-connect
-    name: Green Button Connect My Data
-    tags:
-      - Energy
-      - Green Button
-      - Authentication
-      - Smart Meter
-      - Usage Data
-    tags_raw:
-      - Energy
-      - Green Button
-      - OAuth2
-      - Smart Meter
-      - Usage Data
-    humanURL: >-
-      https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
-    properties:
-      - url: >-
-          https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
-        type: Documentation
-      - url: >-
-          https://www.coned.com/en/business-partners/access-customer-data
-        type: Authentication
-    description: >-
-      Green Button Connect My Data is the OAuth2-based ESPI service that lets
-      Con Edison customers authorize a registered third party to receive their
-      interval energy usage and account data on a recurring basis. Third
-      parties register through Con Edison's onboarding process to obtain
-      client credentials, then exchange them for access tokens that retrieve
-      ESPI Atom/XML resources for usage points, meter readings, and electric
-      power usage summaries.
-  - aid: consolidated-edison:green-button-download
-    name: Green Button Download My Data
-    tags:
-      - CSV
-      - Energy
-      - Green Button
-      - Self-Service
-      - Usage Data
-      - XML
-    humanURL: >-
-      https://www.coned.com/en/save-money/make-better-energychoices-with-green-button
-    properties:
-      - url: >-
-          https://www.coned.com/en/save-money/make-better-energychoices-with-green-button
-        type: Documentation
-    description: >-
-      Customer-driven file export that lets Con Edison residential and small
-      commercial accounts download up to one year of smart-meter interval data
-      as CSV or ESPI XML directly from the My Account portal. Useful for
-      one-shot analytics, audits, and migrating data into third-party tools
-      without requiring an OAuth integration.
+- aid: consolidated-edison:green-button-connect
+  name: Green Button Connect My Data
+  tags:
+  - Energy
+  - Green Button
+  - Authentication
+  - Smart Meter
+  - Usage Data
+  tags_raw:
+  - Energy
+  - Green Button
+  - OAuth2
+  - Smart Meter
+  - Usage Data
+  humanURL: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  properties:
+  - url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+    type: Documentation
+  - url: https://www.coned.com/en/business-partners/access-customer-data
+    type: Authentication
+  - url: openapi/consolidated-edison-green-button-connect-openapi.yml
+    type: OpenAPI
+  - url: https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+    type: Swagger
+    name: DCX GBC API V2 — Swagger 2.0 definition published by Con Edison
+  - url: https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/postman-collection.json?sp=r&st=2026-04-28T15:40:29Z&se=2031-08-29T23:55:29Z&spr=https&sv=2025-11-05&sr=b&sig=rrSK9xQA4obHLvHoXI9Q2N61Z2KDHANFrKJp3cMoygU%3D
+    type: Postman
+    name: GBC Certification Third party V3.3
+  - url: https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+    type: APIReference
+  - url: https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+    type: GettingStarted
+    name: Green Button Connect Third-Party Technical Onboarding Document v4.4
+  - url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party/registration-form
+    type: SignUp
+  - url: overlays/consolidated-edison-green-button-connect-overlay.yaml
+    type: Overlay
+  - url: mcp/consolidated-edison-mcp.yml
+    type: X-MCPServerCandidate
+  description: Green Button Connect My Data is the OAuth2-based ESPI service that lets Con Edison
+    customers authorize a registered third party to receive their interval energy usage and account
+    data on a recurring basis. Third parties register through Con Edison's onboarding process to
+    obtain client credentials, then exchange them for access tokens that retrieve ESPI Atom/XML resources
+    for usage points, meter readings, and electric power usage summaries.
+  baseURL: https://api.coned.com/gbc/espi/1_1
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/consolidated-edison.png
+- aid: consolidated-edison:green-button-download
+  name: Green Button Download My Data
+  tags:
+  - CSV
+  - Energy
+  - Green Button
+  - Self-Service
+  - Usage Data
+  - XML
+  humanURL: https://www.coned.com/en/save-money/make-better-energychoices-with-green-button
+  properties:
+  - url: https://www.coned.com/en/save-money/make-better-energychoices-with-green-button
+    type: Documentation
+  - url: https://www.coned.com/en/save-money/make-better-energychoices-with-green-button
+    type: GettingStarted
+  description: Customer-driven file export that lets Con Edison residential and small commercial
+    accounts download up to one year of smart-meter interval data as CSV or ESPI XML directly from
+    the My Account portal. Useful for one-shot analytics, audits, and migrating data into third-party
+    tools without requiring an OAuth integration.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/consolidated-edison.png
 common:
-  - type: DomainSecurity
-    url: security/consolidated-edison-domain-security.yml
-  - type: GitHubOrganization
-    url: https://github.com/Con-Edison
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/con-edison
-  - type: Website
-    url: https://www.coned.com
-  - type: Customer Portal
-    url: https://www.coned.com/en/accounts-billing
-  - type: Become a Third Party
-    url: >-
-      https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
-  - type: Share My Data Overview
-    url: >-
-      https://www.coned.com/en/accounts-billing/share-energy-usage-data/share-my-data
-  - type: Investor Relations
-    url: https://investor.conedison.com
-  - type: Careers
-    url: https://www.conedjobs.com
-  - type: PrivacyPolicy
-    url: https://www.coned.com/en/about-us/privacy-statement
-  - type: TermsOfService
-    url: https://www.coned.com/en/about-us/terms-of-use
-  - type: Support
-    url: https://www.coned.com/en/contact-us
+- type: AgenticAccess
+  url: agentic-access/consolidated-edison-agentic-access.yml
+- type: DomainSecurity
+  url: security/consolidated-edison-domain-security.yml
+- type: GitHubOrganization
+  url: https://github.com/Con-Edison
+- type: LinkedIn
+  url: https://www.linkedin.com/company/con-edison
+- type: Website
+  url: https://www.coned.com
+- type: Login
+  url: https://www.coned.com/en/accounts-billing/my-account
+- type: Registration
+  url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+- type: About
+  url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/share-my-data
+- type: InvestorRelations
+  url: https://investor.conedison.com
+  note: Returns 403 (edge bot challenge) to non-browser clients; the page is live in a browser.
+- type: Careers
+  url: https://www.coned.com/en/about-us/careers
+  note: https://www.conedjobs.com did not resolve from this network on 2026-09-05; replaced with
+    the first-party careers page on coned.com, which returns 200.
+- type: PrivacyPolicy
+  url: https://www.coned.com/en/privacy
+- type: TermsOfService
+  url: https://www.coned.com/en/terms-and-conditions
+- type: Support
+  url: https://www.coned.com/en/contact-us
+- type: Documentation
+  url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+- type: APIReference
+  url: https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+- type: GettingStarted
+  url: https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+- type: SignUp
+  url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party/registration-form
+- type: Postman
+  url: https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/postman-collection.json?sp=r&st=2026-04-28T15:40:29Z&se=2031-08-29T23:55:29Z&spr=https&sv=2025-11-05&sr=b&sig=rrSK9xQA4obHLvHoXI9Q2N61Z2KDHANFrKJp3cMoygU%3D
+- type: FAQ
+  url: https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/faq.pdf
+- type: Authentication
+  url: authentication/consolidated-edison-authentication.yml
+- type: OAuthScopes
+  url: scopes/consolidated-edison-scopes.yml
+- type: Conformance
+  url: conformance/consolidated-edison-conformance.yml
+- type: Conventions
+  url: conventions/consolidated-edison-conventions.yml
+- type: ErrorCatalog
+  url: errors/consolidated-edison-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/consolidated-edison-lifecycle.yml
+- type: Sandbox
+  url: sandbox/consolidated-edison-sandbox.yml
+- type: DataModel
+  url: data-model/consolidated-edison-data-model.yml
+- type: Packages
+  url: packages/consolidated-edison-packages.yml
+- type: Webhooks
+  url: asyncapi/consolidated-edison-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/consolidated-edison-llms.txt
+- type: Overlay
+  url: overlays/consolidated-edison-green-button-connect-overlay.yaml
+- type: RateLimits
+  url: rate-limits/consolidated-edison-rate-limits.yml
+- type: Plans
+  url: plans/consolidated-edison-plans-pricing.yml
+- type: FinOps
+  url: finops/consolidated-edison-finops.yml
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-09-05'
+  status: enriched
+  artifacts_added: 22
+  pass: local-v3

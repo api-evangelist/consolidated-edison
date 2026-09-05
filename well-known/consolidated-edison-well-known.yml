@@ -1,0 +1,96 @@
+generated: '2026-09-05'
+method: probed
+source: live HTTP probes, 2026-09-05
+hit_count: 0
+path_echo_control: passed
+finding: >-
+  Con Edison serves no /.well-known/ discovery document on any host this record
+  knows. Every path below returned 404 (or a 301 to the www host on the apex).
+  www.coned.com answers 404 with its branded error page; api.coned.com and
+  apit.coned.com — the real Green Button Connect gateways — answer 404 with a
+  54-byte JSON body {"statusCode": 404, "message": "Resource not found"}, which
+  is an honest gateway 404, not a catch-all. A negative-control path that cannot
+  exist returned 404 on all four hosts, so none of these hosts echoes paths.
+  No WellKnown and no SecurityTxt pointer is emitted.
+hosts:
+  - host: https://www.coned.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /.well-known/ucp.json, status: 404}
+      - {path: /.well-known/acp.json, status: 404}
+      - {path: /.well-known/aauth-resource.json, status: 404}
+      - {path: /.well-known/apis.json, status: 404}
+      - {path: /apis.json, status: 404}
+      - {path: /apis.yml, status: 404}
+      - {path: /.well-known/consolidated-edison-negative-control-7f3ab91c.json, status: 404, control: true}
+  - host: https://coned.com
+    note: apex redirects (301) to https://www.coned.com for every path probed
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 301}
+      - {path: /.well-known/ucp.json, status: 301}
+      - {path: /.well-known/acp.json, status: 301}
+      - {path: /.well-known/aauth-resource.json, status: 301}
+      - {path: /apis.yml, status: 301}
+      - {path: /.well-known/consolidated-edison-negative-control-7f3ab91c.json, status: 301, control: true}
+  - host: https://api.coned.com
+    note: >-
+      Production Green Button Connect ESPI gateway. Returns a JSON 404 envelope;
+      GET /gbc/espi/1_1/resource/ReadServiceStatus returned 401 anonymously,
+      confirming a live authenticated API behind this host.
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /.well-known/ucp.json, status: 404}
+      - {path: /.well-known/acp.json, status: 404}
+      - {path: /.well-known/aauth-resource.json, status: 404}
+      - {path: /.well-known/apis.json, status: 404}
+      - {path: /apis.json, status: 404}
+      - {path: /apis.yml, status: 404}
+      - {path: /openapi.json, status: 404}
+      - {path: /gbc/espi/1_1/swagger.json, status: 404}
+      - {path: /.well-known/consolidated-edison-negative-control-7f3ab91c.json, status: 404, control: true}
+  - host: https://apit.coned.com
+    note: Test Green Button Connect ESPI gateway.
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /.well-known/ucp.json, status: 404}
+      - {path: /.well-known/acp.json, status: 404}
+      - {path: /.well-known/aauth-resource.json, status: 404}
+      - {path: /.well-known/apis.json, status: 404}
+      - {path: /apis.json, status: 404}
+      - {path: /apis.yml, status: 404}
+      - {path: /openapi.json, status: 404}
+      - {path: /gbc/espi/1_1/swagger.json, status: 500}
+      - {path: /.well-known/consolidated-edison-negative-control-7f3ab91c.json, status: 404, control: true}
+  - host: https://uat10.coned.com
+    note: >-
+      Test-environment authorization host named in the onboarding document. Did
+      not answer from the public internet on 2026-09-05 (connection timed out) —
+      it appears to be reachable only from within the Con Edison network.
+    documents:
+      - {path: /.well-known/security.txt, status: 0}
+      - {path: /.well-known/openid-configuration, status: 0}
+      - {path: /.well-known/oauth-authorization-server, status: 0}
+      - {path: /.well-known/oauth-protected-resource, status: 0}
+      - {path: /.well-known/api-catalog, status: 0}
+      - {path: /.well-known/agent-card.json, status: 0}
+      - {path: /.well-known/agent.json, status: 0}

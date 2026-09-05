@@ -1,0 +1,88 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+docs: >-
+  https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+standards:
+  - id: naesb-espi-req21
+    name: NAESB REQ.21 Energy Services Provider Interface (ESPI)
+    conforms: true
+    evidence: >-
+      Con Edison's Third-Party Technical Onboarding Document v4.4 lists
+      "REQ.21 - Energy Services Provider Interface" (http://www.naesb.org/ESPI_Standards.asp)
+      as a normative document reference; the API path family
+      /gbc/espi/1_1/resource/{UsagePoint,MeterReading,IntervalBlock,ReadingType,UsageSummary,LocalTimeParameters}
+      is the ESPI resource model verbatim.
+    domain_standard: true
+  - id: green-button-connect-my-data
+    name: Green Button Connect My Data (CMD)
+    version: '3.3'
+    conforms: true
+    evidence: >-
+      Onboarding document section 3.6.6 states "Connect my data will continue to
+      support real time APIs even though they are not part of the GBC V3.3
+      Standard"; the certification Postman collection Con Edison publishes is
+      named "GBC Certification Third party V3.3".
+    domain_standard: true
+  - id: green-button-download-my-data
+    name: Green Button Download My Data (DMD)
+    conforms: true
+    evidence: >-
+      https://www.coned.com/en/save-money/make-better-energychoices-with-green-button
+      publishes customer-initiated CSV / ESPI XML export of smart-meter data.
+    domain_standard: true
+  - id: oauth2-rfc6749
+    name: The OAuth 2.0 Authorization Framework (RFC 6749)
+    conforms: true
+    evidence: >-
+      Listed as document reference #2 in the onboarding document; authorization
+      code, refresh token and client credentials grants are all documented with
+      live token endpoints.
+  - id: oauth2-bearer-rfc6750
+    name: OAuth 2.0 Bearer Token Usage (RFC 6750)
+    conforms: true
+    evidence: >-
+      Listed as document reference #3 in the onboarding document; ESPI resources
+      return 401 on an anonymous request (observed against
+      https://api.coned.com/gbc/espi/1_1/resource/ReadServiceStatus).
+  - id: atom-rfc4287
+    name: Atom Syndication Format (RFC 4287)
+    conforms: true
+    evidence: >-
+      ESPI resources are Atom feeds — the Swagger definition declares
+      application/atom+xml on every operation and models Feed / Entry / Content /
+      Link definitions.
+  - id: swagger-2.0
+    name: OpenAPI (Swagger) 2.0
+    conforms: true
+    evidence: >-
+      Con Edison publishes a Swagger 2.0 definition ("DCX GBC API V2", 37
+      operations) linked from the Become a Third Party onboarding document.
+  - id: rfc9457-problem-details
+    name: RFC 9457 Problem Details for HTTP APIs
+    conforms: false
+    evidence: >-
+      Error bodies are ESPI/Atom XML or a bare {statusCode,message} JSON object
+      (observed on 404 from api.coned.com); no application/problem+json is
+      declared anywhere in the specification.
+  - id: openid-connect
+    name: OpenID Connect Discovery
+    conforms: false
+    evidence: >-
+      /.well-known/openid-configuration returns 404 on www.coned.com,
+      api.coned.com and apit.coned.com (probed 2026-09-05).
+  - id: rfc9116-security-txt
+    name: RFC 9116 security.txt
+    conforms: false
+    evidence: >-
+      /.well-known/security.txt returns 404 on every Con Edison host probed
+      2026-09-05.
+compliance_program:
+  published: false
+  note: >-
+    Customer data handling is governed by the New York Public Service
+    Commission's Customer Data Access Tariff and Con Edison's Data Security
+    Agreement, both of which are executed during third-party onboarding rather
+    than published as a certifications page. No SOC 2 / ISO 27001 trust center
+    was found (probe-security-programs.py, 2026-09-05).

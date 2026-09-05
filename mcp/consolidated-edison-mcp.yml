@@ -1,0 +1,774 @@
+generated: '2026-09-05'
+method: derived
+status: candidate
+source: openapi/consolidated-edison-green-button-connect-openapi.yml
+finding: Con Edison publishes no MCP server. No hosted remote MCP endpoint, no stdio package on npm or
+  PyPI, and nothing in the Green Button Connect Third-Party Technical Onboarding Document v4.4 mentions
+  MCP or agents. The tools below are a CANDIDATE surface derived one-for-one from Con Edison's own published
+  Swagger operations; nobody ships this server. Every tool would inherit its real input schema from the
+  backing operation's parameters, which are carried here verbatim.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: oauth
+  auth_note: Any real server would have to carry the ESPI OAuth 2.0 flow — a per-customer authorization
+    code grant plus a client-credentials Client Access Token — see authentication/consolidated-edison-authentication.yml.
+  verified: searched
+server:
+  name: consolidated-edison-green-button-connect
+  transport: null
+  url: null
+tool_count: 37
+tools:
+- name: get_third_party_application_by_id
+  description: GET /gbc/espi/1_1/resource/ApplicationInformation/{applicationInformationId} — ApplicationInformation
+    resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getThirdPartyApplicationById
+  method: GET
+  path: /resource/ApplicationInformation/{applicationInformationId}
+  category: ApplicationInformation
+  input_schema_source: openapi parameters
+  parameters:
+  - name: applicationInformationId
+    in: path
+    required: true
+    type: string
+- name: get_all_third_party_authorizations
+  description: GET /gbc/espi/1_1/resource/Authorization — Authorization resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#Get all Third Party Authorizations
+  method: GET
+  path: /resource/Authorization
+  category: Authorization
+  input_schema_source: openapi parameters
+  parameters:
+  - name: publishedMax
+    in: query
+    required: false
+    type: string
+  - name: publishedMin
+    in: query
+    required: false
+    type: string
+  - name: updatedMax
+    in: query
+    required: false
+    type: string
+  - name: updatedMin
+    in: query
+    required: false
+    type: string
+- name: get_third_party_authorization_by_id
+  description: GET /gbc/espi/1_1/resource/Authorization/{authorizationId} — Authorization resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#Get Third Party Authorization
+    by ID
+  method: GET
+  path: /resource/Authorization/{authorizationId}
+  category: Authorization
+  input_schema_source: openapi parameters
+  parameters:
+  - name: authorizationId
+    in: path
+    required: true
+    type: string
+  - name: publishedMax
+    in: query
+    required: false
+    type: string
+  - name: publishedMin
+    in: query
+    required: false
+    type: string
+  - name: updatedMax
+    in: query
+    required: false
+    type: string
+  - name: updatedMin
+    in: query
+    required: false
+    type: string
+- name: read_service_status
+  description: GET /gbc/espi/1_1/resource/ReadServiceStatus — ServiceStatus resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#readServiceStatus
+  method: GET
+  path: /resource/ReadServiceStatus
+  category: ServiceStatus
+  input_schema_source: openapi parameters
+  parameters: []
+- name: token
+  description: POST /gbc/espi/1_1/oauth/Token — Authorization resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#Token
+  method: POST
+  path: /oauth/Token
+  category: Authorization
+  input_schema_source: openapi parameters
+  parameters:
+  - name: tokenRequest
+    in: body
+    required: true
+    type: object
+- name: get_all_usage_data_in_batch
+  description: GET /gbc/espi/1_1/resource/Batch/Bulk/{bulkId} — Batch resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getAllUsageDataInBatch
+  method: GET
+  path: /resource/Batch/Bulk/{bulkId}
+  category: Batch
+  input_schema_source: openapi parameters
+  parameters:
+  - name: bulkId
+    in: path
+    required: true
+    type: string
+  - name: published-min
+    in: query
+    required: false
+    type: string
+  - name: published-max
+    in: query
+    required: false
+    type: string
+- name: get_all_usage_data_for_subscription_in_batch
+  description: GET /gbc/espi/1_1/resource/Batch/Subscription/{subscriptionId} — Batch resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getAllUsageDataForSubscriptionInBatch
+  method: GET
+  path: /resource/Batch/Subscription/{subscriptionId}
+  category: Batch
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: published-min
+    in: query
+    required: false
+    type: string
+  - name: published-max
+    in: query
+    required: false
+    type: string
+- name: get_usage_point_by_subscription_in_batch
+  description: GET /gbc/espi/1_1/resource/Batch/Subscription/{subscriptionId}/UsagePoint/{usagePointId}
+    — Batch resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getUsagePointBySubscriptionInBatch
+  method: GET
+  path: /resource/Batch/Subscription/{subscriptionId}/UsagePoint/{usagePointId}
+  category: Batch
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: usagePointId
+    in: path
+    required: true
+    type: string
+  - name: published-min
+    in: query
+    required: false
+    type: string
+  - name: published-max
+    in: query
+    required: false
+    type: string
+- name: get_customer_information_in_batch
+  description: GET /gbc/espi/1_1/resource/Batch/RetailCustomer/{subscriptionId} — Batch resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getCustomerInformationInBatch
+  method: GET
+  path: /resource/Batch/RetailCustomer/{subscriptionId}
+  category: Batch
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+- name: get_all_interval_blocks_for_usage_point_meter_reading_in_subscription
+  description: GET /gbc/espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock
+    — IntervalBlock resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getAllIntervalBlocksForUsagePointMeterReadingInSubscription
+  method: GET
+  path: /resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock
+  category: IntervalBlock
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: usagePointId
+    in: path
+    required: true
+    type: string
+  - name: meterReadingId
+    in: path
+    required: true
+    type: string
+  - name: published-min
+    in: query
+    required: false
+    type: string
+  - name: published-max
+    in: query
+    required: false
+    type: string
+  - name: startIndex
+    in: query
+    required: false
+    type: integer
+- name: get_interval_blocks_for_usage_point_meter_reading_in_subscription
+  description: GET /gbc/espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock/{intervalBlockId}
+    — IntervalBlock resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getIntervalBlocksForUsagePointMeterReadingInSubscription
+  method: GET
+  path: /resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock/{intervalBlockId}
+  category: IntervalBlock
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: usagePointId
+    in: path
+    required: true
+    type: string
+  - name: meterReadingId
+    in: path
+    required: true
+    type: string
+  - name: intervalBlockId
+    in: path
+    required: true
+    type: string
+  - name: published-min
+    in: query
+    required: false
+    type: string
+  - name: published-max
+    in: query
+    required: false
+    type: string
+  - name: startIndex
+    in: query
+    required: false
+    type: integer
+- name: get_local_time_parameters
+  description: GET /gbc/espi/1_1/resource/LocalTimeParameters — LocalTimeParameters resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getLocalTimeParameters
+  method: GET
+  path: /resource/LocalTimeParameters
+  category: LocalTimeParameters
+  input_schema_source: openapi parameters
+  parameters:
+  - name: startIndex
+    in: query
+    required: false
+    type: integer
+- name: get_local_time_parameters_by_id
+  description: GET /gbc/espi/1_1/resource/LocalTimeParameters/{localTimeParameterId} — LocalTimeParameters
+    resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getLocalTimeParametersById
+  method: GET
+  path: /resource/LocalTimeParameters/{localTimeParameterId}
+  category: LocalTimeParameters
+  input_schema_source: openapi parameters
+  parameters:
+  - name: localTimeParameterId
+    in: path
+    required: true
+    type: string
+  - name: startIndex
+    in: query
+    required: false
+    type: integer
+- name: get_all_meter_readings_for_usage_point_in_subscription
+  description: GET /gbc/espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading
+    — MeterReading resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getAllMeterReadingsForUsagePointInSubscription
+  method: GET
+  path: /resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading
+  category: MeterReading
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: usagePointId
+    in: path
+    required: true
+    type: string
+  - name: startIndex
+    in: query
+    required: false
+    type: integer
+- name: get_meter_reading_for_usage_point_in_subscription
+  description: GET /gbc/espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}
+    — MeterReading resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getMeterReadingForUsagePointInSubscription
+  method: GET
+  path: /resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}
+  category: MeterReading
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: usagePointId
+    in: path
+    required: true
+    type: string
+  - name: meterReadingId
+    in: path
+    required: true
+    type: string
+  - name: startIndex
+    in: query
+    required: false
+    type: integer
+- name: get_all_reading_types
+  description: GET /gbc/espi/1_1/resource/ReadingType — ReadingType resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getAllReadingTypes
+  method: GET
+  path: /resource/ReadingType
+  category: ReadingType
+  input_schema_source: openapi parameters
+  parameters:
+  - name: startIndex
+    in: query
+    required: false
+    type: integer
+- name: get_reading_types_by_id
+  description: GET /gbc/espi/1_1/resource/ReadingType/{readingTypeId} — ReadingType resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getReadingTypesById
+  method: GET
+  path: /resource/ReadingType/{readingTypeId}
+  category: ReadingType
+  input_schema_source: openapi parameters
+  parameters:
+  - name: readingTypeId
+    in: path
+    required: true
+    type: string
+  - name: startIndex
+    in: query
+    required: false
+    type: integer
+- name: get_all_real_time_usage_data_in_batch
+  description: GET /gbc/espi/1_1/resource/RealTime/Batch/Bulk/{bulkId} — RealTimeBatch resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getAllRealTimeUsageDataInBatch
+  method: GET
+  path: /resource/RealTime/Batch/Bulk/{bulkId}
+  category: RealTimeBatch
+  input_schema_source: openapi parameters
+  parameters:
+  - name: bulkId
+    in: path
+    required: true
+    type: string
+  - name: published-min
+    in: query
+    required: false
+    type: string
+  - name: published-max
+    in: query
+    required: false
+    type: string
+- name: get_all_real_time_usage_data_for_subscription_in_batch
+  description: GET /gbc/espi/1_1/resource/RealTime/Batch/Subscription/{subscriptionId} — RealTimeBatch
+    resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getAllRealTimeUsageDataForSubscriptionInBatch
+  method: GET
+  path: /resource/RealTime/Batch/Subscription/{subscriptionId}
+  category: RealTimeBatch
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: published-min
+    in: query
+    required: false
+    type: string
+  - name: published-max
+    in: query
+    required: false
+    type: string
+- name: get_real_time_usage_point_by_subscription_in_batch
+  description: GET /gbc/espi/1_1/resource/RealTime/Batch/Subscription/{subscriptionId}/UsagePoint/{usagePointId}
+    — RealTimeBatch resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getRealTimeUsagePointBySubscriptionInBatch
+  method: GET
+  path: /resource/RealTime/Batch/Subscription/{subscriptionId}/UsagePoint/{usagePointId}
+  category: RealTimeBatch
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: usagePointId
+    in: path
+    required: true
+    type: string
+  - name: published-min
+    in: query
+    required: false
+    type: string
+  - name: published-max
+    in: query
+    required: false
+    type: string
+- name: get_all_real_time_interval_blocks_for_usage_point_meter_reading_in_subscription
+  description: GET /gbc/espi/1_1/resource/RealTime/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock
+    — RealTimeIntervalBlock resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getAllRealTimeIntervalBlocksForUsagePointMeterReadingInSubscription
+  method: GET
+  path: /resource/RealTime/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock
+  category: RealTimeIntervalBlock
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: usagePointId
+    in: path
+    required: true
+    type: string
+  - name: meterReadingId
+    in: path
+    required: true
+    type: string
+  - name: startIndex
+    in: query
+    required: false
+    type: integer
+- name: get_real_time_interval_block_for_usage_point_meter_reading_in_subscription
+  description: GET /gbc/espi/1_1/resource/RealTime/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock/{intervalBlockId}
+    — RealTimeIntervalBlock resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getRealTimeIntervalBlockForUsagePointMeterReadingInSubscription
+  method: GET
+  path: /resource/RealTime/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock/{intervalBlockId}
+  category: RealTimeIntervalBlock
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: usagePointId
+    in: path
+    required: true
+    type: string
+  - name: meterReadingId
+    in: path
+    required: true
+    type: string
+  - name: intervalBlockId
+    in: path
+    required: true
+    type: string
+  - name: startIndex
+    in: query
+    required: false
+    type: integer
+- name: get_all_real_time_reading_types
+  description: GET /gbc/espi/1_1/resource/RealTime/ReadingType — RealTimeReadingType resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getAllRealTimeReadingTypes
+  method: GET
+  path: /resource/RealTime/ReadingType
+  category: RealTimeReadingType
+  input_schema_source: openapi parameters
+  parameters:
+  - name: startIndex
+    in: query
+    required: false
+    type: integer
+- name: get_real_time_reading_type_by_id
+  description: GET /gbc/espi/1_1/resource/RealTime/ReadingType/{readingTypeId} — RealTimeReadingType resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getRealTimeReadingTypeById
+  method: GET
+  path: /resource/RealTime/ReadingType/{readingTypeId}
+  category: RealTimeReadingType
+  input_schema_source: openapi parameters
+  parameters:
+  - name: readingTypeId
+    in: path
+    required: true
+    type: string
+  - name: startIndex
+    in: query
+    required: false
+    type: integer
+- name: get_customer_information_by_subscription
+  description: GET /gbc/espi/1_1/resource/Customer/{subscriptionId} — RetailCustomer resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getCustomerInformationBySubscription
+  method: GET
+  path: /resource/Customer/{subscriptionId}
+  category: RetailCustomer
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+- name: get_customer_account_in_subscription
+  description: GET /gbc/espi/1_1/resource/Customer/{subscriptionId}/CustomerAccount — RetailCustomer resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getCustomerAccountInSubscription
+  method: GET
+  path: /resource/Customer/{subscriptionId}/CustomerAccount
+  category: RetailCustomer
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+- name: get_customer_account_by_account_id_in_subscription
+  description: GET /gbc/espi/1_1/resource/Customer/{subscriptionId}/CustomerAccount/{accountId} — RetailCustomer
+    resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getCustomerAccountByAccountIdInSubscription
+  method: GET
+  path: /resource/Customer/{subscriptionId}/CustomerAccount/{accountId}
+  category: RetailCustomer
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: accountId
+    in: path
+    required: true
+    type: string
+- name: get_customer_agreement_by_account_id_in_subscription
+  description: GET /gbc/espi/1_1/resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement
+    — RetailCustomer resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getCustomerAgreementByAccountIdInSubscription
+  method: GET
+  path: /resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement
+  category: RetailCustomer
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: accountId
+    in: path
+    required: true
+    type: string
+- name: get_customer_agreement_by_customer_agreement_id
+  description: GET /gbc/espi/1_1/resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement/{customerAgreementId}
+    — RetailCustomer resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getCustomerAgreementByCustomerAgreementId
+  method: GET
+  path: /resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement/{customerAgreementId}
+  category: RetailCustomer
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: accountId
+    in: path
+    required: true
+    type: string
+  - name: customerAgreementId
+    in: path
+    required: true
+    type: string
+- name: get_all_service_location_by_customer_agreement_id_and_account_id_in_subscription
+  description: GET /gbc/espi/1_1/resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement/{customerAgreementId}/ServiceLocation
+    — RetailCustomer resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getAllServiceLocationByCustomerAgreementIdAndAccountIdInSubscription
+  method: GET
+  path: /resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement/{customerAgreementId}/ServiceLocation
+  category: RetailCustomer
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: accountId
+    in: path
+    required: true
+    type: string
+  - name: customerAgreementId
+    in: path
+    required: true
+    type: string
+- name: get_service_location_by_service_location_id
+  description: GET /gbc/espi/1_1/resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement/{customerAgreementId}/ServiceLocation/{serviceLocationId}
+    — RetailCustomer resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getServiceLocationByServiceLocationId
+  method: GET
+  path: /resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement/{customerAgreementId}/ServiceLocation/{serviceLocationId}
+  category: RetailCustomer
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: accountId
+    in: path
+    required: true
+    type: string
+  - name: customerAgreementId
+    in: path
+    required: true
+    type: string
+  - name: serviceLocationId
+    in: path
+    required: true
+    type: string
+- name: get_all_meters_for_service_location_in_subscription
+  description: GET /gbc/espi/1_1/resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement/{customerAgreementId}/ServiceLocation/{serviceLocationId}/Meter
+    — RetailCustomer resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getAllMetersForServiceLocationInSubscription
+  method: GET
+  path: /resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement/{customerAgreementId}/ServiceLocation/{serviceLocationId}/Meter
+  category: RetailCustomer
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: accountId
+    in: path
+    required: true
+    type: string
+  - name: customerAgreementId
+    in: path
+    required: true
+    type: string
+  - name: serviceLocationId
+    in: path
+    required: true
+    type: string
+- name: get_meter_by_serial_number_id
+  description: GET /gbc/espi/1_1/resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement/{customerAgreementId}/ServiceLocation/{serviceLocationId}/Meter/{serialNumber}
+    — RetailCustomer resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getMeterBySerialNumberId
+  method: GET
+  path: /resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement/{customerAgreementId}/ServiceLocation/{serviceLocationId}/Meter/{serialNumber}
+  category: RetailCustomer
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: accountId
+    in: path
+    required: true
+    type: string
+  - name: customerAgreementId
+    in: path
+    required: true
+    type: string
+  - name: serviceLocationId
+    in: path
+    required: true
+    type: string
+  - name: serialNumber
+    in: path
+    required: true
+    type: string
+- name: get_all_electric_power_usage_summaries
+  description: GET /gbc/espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/UsageSummary
+    — ElectricPowerUsageSummary resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getAllElectricPowerUsageSummaries
+  method: GET
+  path: /resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/UsageSummary
+  category: ElectricPowerUsageSummary
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: usagePointId
+    in: path
+    required: true
+    type: string
+  - name: published-min
+    in: query
+    required: true
+    type: string
+  - name: published-max
+    in: query
+    required: true
+    type: string
+  - name: startIndex
+    in: query
+    required: false
+    type: integer
+- name: get_all_electric_power_usage_summaries_by_id
+  description: POST /gbc/espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/UsageSummary/{usageSummaryId}
+    — ElectricPowerUsageSummary resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getAllElectricPowerUsageSummariesById
+  method: POST
+  path: /resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/UsageSummary/{usageSummaryId}
+  category: ElectricPowerUsageSummary
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: usagePointId
+    in: path
+    required: true
+    type: string
+  - name: usageSummaryId
+    in: path
+    required: true
+    type: string
+- name: get_all_usage_points_by_subscription
+  description: GET /gbc/espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint — UsagePoint resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getAllUsagePointsBySubscription
+  method: GET
+  path: /resource/Subscription/{subscriptionId}/UsagePoint
+  category: UsagePoint
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: startIndex
+    in: query
+    required: false
+    type: integer
+- name: get_usage_points_for_subscription
+  description: GET /gbc/espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId} — UsagePoint
+    resource
+  source_operation: openapi/consolidated-edison-green-button-connect-openapi.yml#getUsagePointsForSubscription
+  method: GET
+  path: /resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}
+  category: UsagePoint
+  input_schema_source: openapi parameters
+  parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    type: string
+  - name: usagePointId
+    in: path
+    required: true
+    type: string
+  - name: startIndex
+    in: query
+    required: false
+    type: integer

@@ -1,0 +1,176 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+derived_from: openapi/consolidated-edison-green-button-connect-openapi.yml
+docs: >-
+  https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+authentication:
+  style: OAuth 2.0 bearer access token (RFC 6750) on every /resource/* call
+  detail: authentication/consolidated-edison-authentication.yml
+  token_ttl_seconds: 3600
+  caching: >-
+    Con Edison explicitly instructs third parties to cache the access token and
+    reuse it for the same subscription for its full hour, and to store an
+    expiry timestamp so an expired token is never presented.
+media_types:
+  request: [application/x-www-form-urlencoded, application/json]
+  response: [application/atom+xml, application/xml, text/xml, application/json, text/json]
+  primary: >-
+    ESPI resources are Atom feeds (RFC 4287) carrying espi:* XML payloads in
+    entry/content; JSON is declared on the operations but the ESPI payload model
+    is XML.
+pagination:
+  style: index-offset over an Atom feed
+  params:
+    - name: startIndex
+      in: query
+      type: integer
+      operations: 15
+  response_fields: Atom feed entries; no total-count or next-link element is declared
+  note: >-
+    Only startIndex is exposed — there is no page-size parameter and no
+    documented default page size. Bounding a result set is done with the
+    published-min / published-max time filters rather than a cursor.
+filtering:
+  time_window:
+    - name: published-min
+      in: query
+      note: ISO 8601 UTC timestamp; used on 9 operations
+    - name: published-max
+      in: query
+      note: ISO 8601 UTC timestamp; used on 9 operations
+    - name: publishedMin
+      in: query
+      note: camelCase variant on the two Batch/Bulk operations
+    - name: publishedMax
+      in: query
+      note: camelCase variant on the two Batch/Bulk operations
+    - name: updatedMin
+      in: query
+    - name: updatedMax
+      in: query
+  inconsistency: >-
+    The same filter is spelled two ways across the surface — published-min on
+    the Subscription and RealTime resources, publishedMin on the Batch/Bulk
+    resources. A client must special-case the Batch family.
+  timezone_rule: >-
+    Queries must always use UTC timestamps computed from local start/end times
+    with the correct offset (UTC-5 EST, UTC-4 EDT). Interval counts per day
+    vary across DST boundaries: 288 on a normal day, 276 when DST starts, 300
+    when DST ends.
+  history_window: >-
+    Two years of historical usage/billing data from the current date. Real-time
+    data covers only the last 24 hours, electricity only.
+versioning:
+  scheme: uri-path
+  current: 1_1
+  base: https://api.coned.com/gbc/espi/1_1
+  standard_version: Green Button Connect My Data V3.3
+  spec_title: DCX GBC API V2
+  note: >-
+    Two independent version numbers are in play: the ESPI path version (1_1)
+    and the Green Button certification version (V3.3). Real-time endpoints sit
+    outside the GBC V3.3 standard and are a Con Edison extension.
+idempotency:
+  supported: false
+  coverage: na
+  applicable: false
+  note: >-
+    The surface has no business write operation. 36 of 37 operations are GET
+    reads of ESPI resources; the one non-GET business operation
+    (getAllElectricPowerUsageSummariesById) is a POST that reads a usage
+    summary, and POST /oauth/Token mints credentials. There is nothing to
+    replay-protect, so no Idempotency-Key mechanism exists or is needed and no
+    Idempotency pointer is emitted.
+  duplicate_request_handling: >-
+    Batch requests are the closest analogue: Con Edison rejects a duplicate
+    batch request while one is still pending, and if the same batch parameters
+    are re-requested within two days the platform returns the cached response
+    prepared for the original request.
+reversibility:
+  applicable: false
+  grade: na
+  note: >-
+    Read-only API. The only state a third party creates is an OAuth
+    authorization, and that is created and revoked by the CUSTOMER in Con
+    Edison's My Account portal, not by an API call. There is no cancel, refund,
+    void or delete operation in the specification to reverse.
+  customer_side_revocation:
+    actor: retail customer
+    mechanism: >-
+      "Stop Sharing My Data" in the Con Edison / Orange & Rockland online
+      account revokes an authorization immediately.
+    automatic_expiry: >-
+      An authorization is revoked automatically if it goes unused for 365 days;
+      a "share one time" authorization expires 24 hours after it is initiated;
+      a "share until a date" authorization expires on that date.
+    docs: >-
+      https://www.coned.com/en/accounts-billing/share-energy-usage-data/share-my-data
+dry_run_mode:
+  applicable: false
+  note: >-
+    No write surface to rehearse. Con Edison instead provides a full separate
+    test environment — see sandbox/consolidated-edison-sandbox.yml.
+asynchronous:
+  pattern: request / 202 / callback notification
+  detail: >-
+    Batch and RealTime/Batch requests are processed asynchronously. HTTP 202
+    signals the Data Custodian accepted the request and needs time to assemble
+    the response; when assembly completes Con Edison POSTs a notification to
+    the third party's registered third_party_notify_uri containing a BatchList
+    of resource URLs to GET.
+  gotcha: >-
+    The download URL is embedded in an XML response and carries XML-escaped
+    characters (&amp;) that must be unescaped before the URL is invoked.
+  retention: >-
+    A batch response must be retrieved within 2 days of notification; after
+    that it is deleted and a re-request behaves as a new batch.
+  size: Responses larger than 200 MB are chunked into multiple files.
+  latency: >-
+    Notifications typically arrive within one hour; up to 24 hours under heavy
+    load.
+  catalog: asyncapi/consolidated-edison-webhooks.yml
+error_envelope:
+  api_gateway: '{"statusCode": <int>, "message": "<string>"}'
+  api_gateway_evidence: >-
+    Observed on https://api.coned.com/gbc/espi/1_1/<unknown path> (2026-09-05):
+    {"statusCode": 404, "message": "Resource not found"}
+  declared_responses: [200, 400, 401]
+  problem_json: false
+  catalog: errors/consolidated-edison-problem-types.yml
+rate_limit_signaling:
+  documented_headers: []
+  note: >-
+    Con Edison publishes a numeric limit (50 token calls per minute on the token
+    endpoint, excluding the authorization_code flow) but documents no
+    RateLimit-* / X-RateLimit-* / Retry-After response headers, so an agent
+    cannot discover its remaining budget at runtime.
+  catalog: rate-limits/consolidated-edison-rate-limits.yml
+data_quality:
+  reading_quality: >-
+    A QualityOfReading value of 17 signifies good, validated data. Historical
+    interval data is finalized and validated; real-time interval data is
+    provisional, unvalidated and explicitly not billing quality.
+  scaling: >-
+    Every value must be scaled by the ReadingType powerOfTenMultiplier:
+    actual = IntervalReading.value x 10^powerOfTenMultiplier. Con Edison's
+    current multipliers are 3 for electric and 0 for gas; uom 72 is watt-hours,
+    uom 119 is cubic feet.
+  availability: >-
+    Historical interval data: 80-90% within 24 hours, 99% within 3 days, 99.8%
+    within 7 days. Real-time electricity data lags 45 minutes from request
+    processing time.
+  intervals:
+    electric_commercial_ami: 5-minute
+    electric_residential_ami: 15-minute
+    electric_legacy_interval: 15-minute
+    gas_ami: 1-hour
+    non_interval: monthly
+cross_links:
+  authentication: authentication/consolidated-edison-authentication.yml
+  scopes: scopes/consolidated-edison-scopes.yml
+  errors: errors/consolidated-edison-problem-types.yml
+  lifecycle: lifecycle/consolidated-edison-lifecycle.yml
+  rate_limits: rate-limits/consolidated-edison-rate-limits.yml
+  data_model: data-model/consolidated-edison-data-model.yml

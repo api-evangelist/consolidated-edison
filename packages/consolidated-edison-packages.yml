@@ -1,0 +1,51 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  npm registry search, registry.npmjs.org, pypi.org/pypi/*/json, GitHub
+  org github.com/Con-Edison, and Con Edison's Green Button Connect
+  Third-Party Technical Onboarding Document v4.4
+official_package_count: 0
+finding: >-
+  Con Edison publishes NO first-party client library for the Green Button
+  Connect (Share My Data) API in any registry. The GitHub organization it
+  operates, github.com/Con-Edison, exists (org id 76075312) but exposes zero
+  public repositories (api.github.com/orgs/Con-Edison/repos returned an empty
+  list, probed 2026-09-05). What Con Edison ships instead of an SDK is a
+  Swagger 2.0 definition and a Postman certification collection, both linked
+  from the onboarding document — see sandbox/consolidated-edison-sandbox.yml.
+  The community packages below are recorded for completeness and are NOT
+  first-party; neither is endorsed by Con Edison.
+packages: []
+community_packages:
+  - language: javascript
+    registry: npm
+    name: "@cityssm/green-button-subscriber"
+    url: https://www.npmjs.com/package/@cityssm/green-button-subscriber
+    install: npm install @cityssm/green-button-subscriber
+    official: false
+    version: 0.5.0
+    published: '2023-10-05'
+    note: >-
+      Generic Green Button / ESPI OAuth + download + parse client published by
+      the City of Sault Ste. Marie, not by Con Edison. Not utility-specific.
+      Last release 2023-10-05, nearly three years before this pass.
+  - language: python
+    registry: pypi
+    name: coned
+    url: https://pypi.org/project/coned/
+    install: pip install coned
+    official: false
+    version: 0.4.0
+    published: '2022-09-30'
+    source_code: https://github.com/bvlaicu/coned/
+    note: >-
+      "Python client for ConEdison smart energy meters" — an independent
+      scraper of the Con Edison customer portal, NOT a Green Button Connect
+      ESPI client and not published by Con Edison. Last release 2022-09-30.
+registries_checked:
+  - registry: npm
+    result: no first-party package
+  - registry: pypi
+    result: no first-party package (the `coned` package is third-party)
+  - registry: github (org Con-Edison)
+    result: 0 public repositories

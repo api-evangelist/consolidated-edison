@@ -1,0 +1,67 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Con Edison Green Button Connect My Data
+  version: 1.0.0
+x-generated: '2026-09-05'
+x-method: generated
+x-source: >-
+  Enhancements derived from Con Edison's own Green Button Connect Third-Party
+  Technical Onboarding Document v4.4 and the observed behaviour of
+  api.coned.com, applied over the verbatim Swagger 2.0 definition at
+  openapi/_original/consolidated-edison-green-button-connect-openapi.json
+extends: openapi/_original/consolidated-edison-green-button-connect-openapi.json
+actions:
+  - target: $
+    description: >-
+      The published definition carries host "provided-by-coned", a placeholder
+      rather than a hostname. Con Edison's onboarding document names the real
+      production host for the same basePath (/gbc/espi/1_1) as api.coned.com,
+      and GET https://api.coned.com/gbc/espi/1_1/resource/ReadServiceStatus
+      returned 401 (an authenticated live endpoint) on 2026-09-05. The working
+      copy at openapi/consolidated-edison-green-button-connect-openapi.yml
+      applies this single change; the _original is untouched.
+    update:
+      host: api.coned.com
+  - target: $.info
+    description: Record the domain standard and the provenance of this definition.
+    update:
+      x-apievangelist-standard: NAESB ESPI REQ.21 / Green Button Connect My Data V3.3
+      x-apievangelist-source: >-
+        https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json
+      x-apievangelist-source-published-by: >-
+        Linked from Con Edison's public Become a Third Party onboarding document
+        (Share My Data), version 4.4, last updated 2026-05-07.
+      x-apievangelist-test-host: apit.coned.com
+  - target: $
+    description: >-
+      The definition declares no securityDefinitions, yet every /resource/*
+      operation requires an OAuth 2.0 bearer access token — the API returns 401
+      anonymously. This adds the scheme Con Edison documents in prose.
+    update:
+      securityDefinitions:
+        GreenButtonOAuth2:
+          type: oauth2
+          flow: accessCode
+          authorizationUrl: https://www.coned.com/en/oauth/authorize
+          tokenUrl: https://api.coned.com/gbc/espi/1_1/oauth/Token
+          description: >-
+            NAESB ESPI OAuth 2.0 profile. The scope parameter is a structured
+            ESPI expression, not a scope list — see
+            scopes/consolidated-edison-scopes.yml.
+          scopes: {}
+  - target: $.paths['/resource/ReadServiceStatus'].get
+    description: >-
+      Flag the health operation as authenticated — it returned 401 anonymously
+      on 2026-09-05, so it is not a public status surface.
+    update:
+      x-apievangelist-authenticated: true
+      x-apievangelist-note: >-
+        Health/status probe for onboarded third parties. Not a public status
+        page; see lifecycle/consolidated-edison-lifecycle.yml.
+  - target: $.paths['/resource/Batch/Subscription/{subscriptionId}'].get
+    description: >-
+      Batch operations are asynchronous — 202 plus a callback to the third
+      party's registered notification URI. The definition declares only 200.
+    update:
+      x-apievangelist-async: true
+      x-apievangelist-callback: asyncapi/consolidated-edison-webhooks.yml

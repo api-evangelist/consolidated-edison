@@ -1,0 +1,102 @@
+generated: '2026-09-05'
+method: derived
+source: openapi/consolidated-edison-green-button-connect-openapi.yml
+searched_source: >-
+  https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+format: none
+format_note: >-
+  Con Edison's Green Button Connect API does NOT use RFC 9457
+  application/problem+json. The Swagger declares only bare status codes with a
+  one-word description; the API gateway returns a {statusCode, message} JSON
+  object, and ESPI resource errors come back as Atom/XML.
+envelope:
+  gateway_shape: '{"statusCode": <int>, "message": "<string>"}'
+  observed:
+    - url: https://api.coned.com/gbc/espi/1_1/swagger.json
+      status: 404
+      body: '{ "statusCode": 404, "message": "Resource not found" }'
+      fetched: '2026-09-05'
+    - url: https://api.coned.com/gbc/espi/1_1/resource/ReadServiceStatus
+      status: 401
+      body: '(empty body)'
+      fetched: '2026-09-05'
+coverage:
+  operations: 37
+  with_400: 37
+  with_401: 36
+  with_5xx: 0
+  note: >-
+    No 403, 404, 429 or 5xx response is declared on any operation, even though
+    the platform demonstrably returns 404 and documents a 429-class rate limit
+    on the token endpoint. The declared error surface is thinner than the
+    deployed one.
+problems:
+  - status: 400
+    title: BadRequest
+    declared_on: 37
+    description: >-
+      Declared on every operation including POST /oauth/Token. Documented causes
+      include malformed or missing scope/redirect parameters on the
+      authorization redirect, and time filters that are not valid UTC
+      timestamps.
+    remediation: >-
+      Verify scope syntax (FB=..;IntervalDuration=..;BlockDuration=..;HistoryLength=..;BR=..),
+      that published-min/published-max are UTC ISO 8601, and that the
+      subscription/usage-point ids come from a live Authorization resource.
+    source_operation: all operations
+  - status: 401
+    title: Unauthorized
+    declared_on: 36
+    description: >-
+      Missing, malformed or expired OAuth 2.0 bearer access token. Access tokens
+      live 60 minutes.
+    remediation: >-
+      Mint a new access token from POST /oauth/Token using grant_type=refresh_token
+      (per-customer) or grant_type=client_credentials (Client Access Token), then
+      retry. Cache the token and track its expiry timestamp.
+    source_operation: >-
+      openapi/consolidated-edison-green-button-connect-openapi.yml — every
+      /resource/* operation
+  - status: 404
+    title: Resource not found
+    declared_on: 0
+    observed: true
+    description: >-
+      Returned by the api.coned.com gateway for an unrouted path, as a
+      {statusCode, message} JSON object. Not declared in the specification.
+    remediation: Check the /gbc/espi/1_1 base path and the ESPI resource path spelling.
+  - status: 202
+    title: Accepted (batch assembly in progress)
+    declared_on: 0
+    documented: true
+    description: >-
+      Not an error. Con Edison documents 202 on Batch and RealTime/Batch requests
+      as "the Data Custodian has accepted the request and will require some time
+      to assemble the response". The result arrives later at the third party's
+      notification URI.
+    remediation: >-
+      Do not poll and do not resubmit — duplicate batch requests while one is
+      pending are rejected and do not shorten the wait. Wait for the callback.
+documented_failure_modes:
+  - condition: Authorization revoked by the customer ("Stop Sharing My Data")
+    effect: Data access is blocked for that subscription.
+    source: Share My Data FAQ for Third Party Vendors, Data Access Q2
+  - condition: Authorization unused for 365 days
+    effect: The authorization is automatically revoked; a new customer authorization is required.
+    source: Share My Data FAQ for Third Party Vendors, Data Access Q2
+  - condition: Refresh token unused for one year
+    effect: >-
+      The refresh token expires; the third party must have the customer revoke
+      and re-authorize to obtain a new one.
+    source: Onboarding Document v4.4 section 3.6.5
+  - condition: Account-to-profile relationship for an authorization no longer valid
+    effect: Data access is blocked, leading to an error.
+    source: Share My Data FAQ for Third Party Vendors, Data Access Q2
+  - condition: Batch response retrieved more than 2 days after notification
+    effect: >-
+      The assembled response has been deleted; the call behaves as a brand new
+      batch request.
+    source: Onboarding Document v4.4 section 3.3.1
+  - condition: More than 50 token calls in one minute (non authorization_code flows)
+    effect: Token requests are rate limited.
+    source: Onboarding Document v4.4 section 3.6.3

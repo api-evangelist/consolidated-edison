@@ -1,0 +1,114 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+docs: >-
+  https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+note: >-
+  Green Button Connect does not use free-text OAuth scope strings. Per NAESB
+  ESPI, the scope parameter is a structured expression built from ESPI
+  Functional Blocks (FB), interval/block durations, history length and a
+  Business Resource (BR) id. The functional blocks below are the ones Con
+  Edison publishes as available in its Third-Party Technical Onboarding
+  Document v4.4; the scope_examples are Con Edison's own published values,
+  copied verbatim.
+scope_model:
+  parameter: scope
+  syntax: >-
+    FB=<functional block ids joined by _>;IntervalDuration=<...>;BlockDuration=<...>;HistoryLength=<seconds>;BR=<business resource id>
+  business_resource: '000092'
+  history_length_seconds: 63072000
+  history_length_note: Two years of history is the published maximum.
+  selection: >-
+    A third party may present the scope picker to the customer, or send a
+    predefined scope. The customer may remove (but not add) preselected scopes
+    on Con Edison's authorization page.
+schemes:
+  - name: GreenButtonOAuth2
+    source: authentication/consolidated-edison-authentication.yml
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://www.coned.com/en/oauth/authorize
+        tokenUrl: https://api.coned.com/gbc/espi/1_1/oauth/Token
+      - flow: clientCredentials
+        tokenUrl: https://api.coned.com/gbc/espi/1_1/oauth/Token
+scopes:
+  - scope: FB_01
+    description: Usage Data common
+    flows: [authorizationCode, clientCredentials]
+  - scope: FB_03
+    description: Usage Data Connect My Data
+    flows: [authorizationCode, clientCredentials]
+  - scope: FB_04
+    description: Interval Reading
+    flows: [authorizationCode, clientCredentials]
+  - scope: FB_05
+    description: Electricity Interval Metering
+    flows: [authorizationCode, clientCredentials]
+  - scope: FB_07
+    description: Net Electricity Metering
+    flows: [authorizationCode, clientCredentials]
+  - scope: FB_08
+    description: Forward and Reverse Electricity Metering
+    flows: [authorizationCode, clientCredentials]
+  - scope: FB_10
+    description: Natural Gas Interval Metering
+    flows: [authorizationCode, clientCredentials]
+  - scope: FB_15
+    description: Usage Summary
+    flows: [authorizationCode, clientCredentials]
+  - scope: FB_16
+    description: Usage Summary with cost
+    flows: [authorizationCode, clientCredentials]
+  - scope: FB_35
+    description: Usage Data Bulk
+    flows: [clientCredentials]
+  - scope: FB_51
+    description: Retail Customer Common
+    flows: [authorizationCode, clientCredentials]
+  - scope: FB_53
+    description: Retail Customer Connect My Data
+    flows: [authorizationCode, clientCredentials]
+  - scope: FB_56
+    description: Retail Customer Billing Information
+    flows: [authorizationCode, clientCredentials]
+  - scope: FB_57
+    description: Retail Customer Account-Agreement Information
+    flows: [authorizationCode, clientCredentials]
+  - scope: FB_58
+    description: Retail Customer Service-location Information
+    flows: [authorizationCode, clientCredentials]
+  - scope: FB_60
+    description: Retail Customer Meter Information
+    flows: [authorizationCode, clientCredentials]
+  - scope: FB_67
+    description: Retail Customer Bulk
+    flows: [clientCredentials]
+mandatory_blocks:
+  - use_case: Consumption
+    required: [1, 3, 4]
+  - use_case: Billing
+    required: [1, 3]
+  - use_case: Retail Customer
+    required: [51, 53]
+scope_examples:
+  - name: Consumption Electricity Scope
+    value: FB=1_3_4_5;IntervalDuration=Monthly_3600_900_300;BlockDuration=Monthly_Daily;HistoryLength=63072000;BR=000092
+  - name: Consumption Electricity Net Scope
+    value: FB=1_3_4_7;IntervalDuration=Monthly_3600_900_300;BlockDuration=Monthly_Daily;HistoryLength=63072000;BR=000092
+  - name: Consumption Gas Scope
+    value: FB=1_3_4_10;IntervalDuration=Monthly_3600_900_300;BlockDuration=Monthly_Daily;HistoryLength=63072000;BR=000092
+  - name: Consumption Forward Reverse Scope
+    value: FB=1_3_4_8;IntervalDuration=Monthly_3600_900_300;BlockDuration=Monthly_Daily;HistoryLength=63072000;BR=000092
+  - name: Billing Information Without Cost Scope
+    value: FB=1_3_15;IntervalDuration=Monthly;BlockDuration=Monthly;HistoryLength=63072000;BR=000092
+  - name: Billing Information With Cost Scope
+    value: FB=1_3_15_16;IntervalDuration=Monthly;BlockDuration=Monthly;HistoryLength=63072000;BR=000092
+  - name: Retail Customer Billing Account Scope
+    value: FB=51_53_56;BR=000092
+  - name: Retail Customer Meter Scope
+    value: FB=51_53_56_57_58_60;BR=000092
+  - name: Multiple Scopes combined
+    value: FB=1_3_4_5_7_8_10_15_16_51_53_56_57_58_60;IntervalDuration=Monthly_3600_900_300;BlockDuration=Monthly_Daily;HistoryLength=63072000;BR=000092
+  - name: Client Access Token bulk scope
+    value: FB=34_35

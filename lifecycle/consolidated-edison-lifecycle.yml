@@ -1,0 +1,80 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+docs: >-
+  https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+versioning:
+  scheme: uri-path
+  current: 1_1
+  base: https://api.coned.com/gbc/espi/1_1
+  spec_title: DCX GBC API V2
+  spec_version: v1
+  standard: Green Button Connect My Data V3.3 (NAESB ESPI REQ.21)
+  note: >-
+    Con Edison publishes no API version policy or version-negotiation header.
+    The ESPI path segment (1_1) has been stable since the program launched; the
+    Green Button certification level (V3.3) moves with the Green Button
+    Alliance, not with Con Edison.
+document_versioning:
+  document: Con Edison / Orange & Rockland Green Button Connect Third-Party Technical Onboarding Document
+  version: '4.4'
+  created: '2018-03-14'
+  last_updated: '2026-05-07'
+  url: >-
+    https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+  note: >-
+    The onboarding document carries its own version and revision dates but no
+    per-release change list, so it is a version marker rather than a changelog.
+    Con Edison publishes no dated API changelog or release-notes feed.
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  note: >-
+    No deprecation policy, no RFC 8594 Sunset/Deprecation header support, and no
+    deprecated operations are marked in the specification. The nearest published
+    end-of-life mechanic is on the CREDENTIAL, not the contract — see
+    authorization_expiry below.
+authorization_expiry:
+  access_token: 60 minutes
+  refresh_token: expires after one year if never used
+  authorization_unused: automatically revoked after 365 days without access
+  one_time_authorization: expires 24 hours after it is initiated
+  registration: >-
+    A third-party registration, once approved, remains valid indefinitely.
+    Registration testing must complete within 90 days of acceptance or the
+    registration is put on hold; no response within 90 days of the business
+    welcome email withdraws the submission.
+  source: Share My Data FAQ for Third Party Vendors
+deprecated_operations: []
+sla:
+  url: null
+  uptime_target: null
+  published_expectations:
+    - metric: Historical interval data availability
+      value: 80-90% within 24 hours, 99% within 3 days, 99.8% within 7 days
+    - metric: Real-time electricity data latency
+      value: 45 minutes from request processing time
+    - metric: Batch notification time
+      value: typically within 1 hour, up to 24 hours under heavy load
+    - metric: Technical onboarding duration
+      value: 30 to 60 days
+  note: >-
+    These are published operational expectations in the onboarding document, not
+    a contractual SLA. No credits or remedies are published.
+status_page: null
+status_page_note: >-
+  Con Edison publishes an electric outage map (https://outagemap.coned.com/external/default.html)
+  for its utility service, but there is no status page for the Green Button
+  Connect API. The specification does expose a health operation
+  (GET /resource/ReadServiceStatus, operationId readServiceStatus) which is
+  authenticated — it returned 401 anonymously on 2026-09-05 — so it is a
+  monitoring endpoint for onboarded third parties, not a public status surface.
+  No StatusPage pointer is emitted.
+support:
+  technical: dlsharemydatatech@coned.com
+  program: ShareMyData@coned.com
+  production_issues: >-
+    Third parties report production issues by email to dlsharemydatatech@coned.com;
+    there is no ticketing portal or public incident feed.

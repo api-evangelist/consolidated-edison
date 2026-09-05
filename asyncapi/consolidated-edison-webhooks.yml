@@ -1,0 +1,66 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+docs: >-
+  https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+spec_type: Webhooks
+asyncapi_published: false
+asyncapi_note: >-
+  Con Edison publishes no AsyncAPI document and no streaming/event catalog. It
+  DOES operate one real server-to-third-party callback, documented in the
+  onboarding document and the Share My Data FAQ, and that callback is captured
+  below. Nothing here is invented — no AsyncAPI has been authored on Con
+  Edison's behalf.
+callbacks:
+  - name: batch-notification
+    direction: Con Edison -> third party
+    trigger: >-
+      A Batch, Batch/Bulk, Batch/RetailCustomer or RealTime/Batch request has
+      finished assembling. The original request returns HTTP 202 immediately;
+      this notification arrives when the data is ready.
+    endpoint_owner: third party
+    endpoint_field: third_party_notify_uri
+    endpoint_registration: >-
+      Set in the technical registration form. Changing it requires resending
+      the form to ShareMyDataTech@coned.com — Con Edison warns that altering
+      or renaming a callback URL without notice breaks the existing integration.
+    transport: HTTPS (TLS 1.2 or higher required on the third-party endpoint)
+    payload: >-
+      An XML response carrying a BatchList of resource URLs. The BatchList may
+      contain URLs for Bulk resources and/or individual ones.
+    payload_gotcha: >-
+      The download URL is embedded in the XML with XML-escaped characters
+      (&amp;) that must be unescaped before the URL is invoked.
+    consumer_action: >-
+      GET each resource URL with the Authorization header corresponding to that
+      batch request.
+    retention: >-
+      The assembled response must be retrieved within 2 days of the
+      notification; after that it is deleted and the URL behaves as a new batch
+      request. Re-requesting the same batch parameters within the 2 days returns
+      the cached response prepared for the original request.
+    latency: Typically within 1 hour; up to 24 hours under heavy load.
+    chunking: Responses larger than 200 MB are split into multiple files.
+    duplicate_policy: >-
+      Duplicate batch requests submitted while one is still pending are
+      rejected by the platform and do not shorten the wait.
+    backing_operations:
+      - getAllUsageDataInBatch
+      - getAllUsageDataForSubscriptionInBatch
+      - getUsagePointBySubscriptionInBatch
+      - getCustomerInformationInBatch
+      - getAllRealTimeUsageDataInBatch
+      - getAllRealTimeUsageDataForSubscriptionInBatch
+      - getRealTimeUsagePointBySubscriptionInBatch
+    source_quote: >-
+      "After the batch request is successfully completed, a notification is sent
+      to the third_party_notify_uri with a link to the requested data."
+      (Share My Data FAQ for Third Party Vendors, Data Access Q7)
+not_events:
+  - name: customer authorization / revocation
+    note: >-
+      A customer granting or revoking an authorization does NOT emit a webhook.
+      A third party discovers the current state by polling
+      GET /resource/Authorization and GET /resource/Authorization/{authorizationId}.
+      Access simply stops working when an authorization is revoked or lapses.

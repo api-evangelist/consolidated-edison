@@ -1,0 +1,96 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+docs: >-
+  https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+note: >-
+  Con Edison's Green Button Connect (Share My Data) Swagger definition ships no
+  securityDefinitions block; the OAuth 2.0 model below is taken verbatim from
+  Con Edison's own "Green Button Connect Third-Party Technical Onboarding
+  Document" v4.4 (last updated 2026-05-07), which is linked from the public
+  Become a Third Party page.
+summary:
+  types:
+    - oauth2
+    - http
+  api_key_in: []
+  oauth2_flows:
+    - authorizationCode
+    - clientCredentials
+    - refreshToken
+  bearer: true
+schemes:
+  - name: GreenButtonOAuth2
+    type: oauth2
+    standard: NAESB ESPI (REQ.21) OAuth 2.0 profile, RFC 6749 + RFC 6750
+    sources:
+      - Con Edison GBC Third-Party Technical Onboarding Document v4.4
+    flows:
+      - flow: authorizationCode
+        description: >-
+          Customer-consented authorization. The third party redirects the retail
+          customer to the utility authorization server with scope, client_id,
+          redirect_uri, state and response_type; on consent the customer is
+          returned to the third-party redirect URI with an authorization code
+          that is exchanged for an access token and refresh token.
+        authorizationUrl: https://www.coned.com/en/oauth/authorize
+        authorizationUrlTest: https://uat10.coned.com/en/oauth/authorize
+        tokenUrl: https://api.coned.com/gbc/espi/1_1/oauth/Token
+        tokenUrlTest: https://apit.coned.com/gbc/espi/1_1/oauth/token
+      - flow: clientCredentials
+        description: >-
+          Third-Party Client Access Token (CAT). grant_type=client_credentials
+          with HTTP Basic client_id:client_secret. A CAT retrieves data for all
+          customers currently authorized to the third party, within the granted
+          scope.
+        tokenUrl: https://api.coned.com/gbc/espi/1_1/oauth/Token
+        tokenUrlTest: https://apit.coned.com/gbc/espi/1_1/oauth/token
+      - flow: refreshToken
+        description: >-
+          grant_type=refresh_token with HTTP Basic client_id:client_secret plus
+          the customer's refresh_token and scope. Used to mint each subsequent
+          one-hour user access token.
+        tokenUrl: https://api.coned.com/gbc/espi/1_1/oauth/Token
+  - name: BearerAccessToken
+    type: http
+    scheme: bearer
+    description: >-
+      All /resource/* ESPI operations are called with the OAuth 2.0 bearer
+      access token in the Authorization header (RFC 6750). Unauthorized calls
+      return 401 (observed live against
+      https://api.coned.com/gbc/espi/1_1/resource/ReadServiceStatus).
+    sources:
+      - openapi/consolidated-edison-green-button-connect-openapi.yml
+token_lifetimes:
+  access_token_seconds: 3600
+  access_token_note: >-
+    All access tokens expire in 60 minutes; Con Edison instructs third parties
+    to cache and reuse the token for the same subscription until it expires.
+  refresh_token_expiry: >-
+    A refresh token expires after one year if it is never used to acquire a new
+    access token; recovery requires the customer to revoke and re-authorize.
+  refresh_token_storage: >-
+    Refresh tokens are issued once at authorization time and are not re-issued —
+    a lost refresh token requires customer revocation and re-authorization.
+credentials:
+  issuance: >-
+    client_id, client_secret and a Registration Access Token are emailed to the
+    third party by Con Edison's GBC technical onboarding team after the
+    registration form and Data Security Agreement are completed. client_id and
+    client_secret can also be retrieved from the ApplicationInformation resource
+    using the Registration Access Token.
+  contact: dlsharemydatatech@coned.com
+  transport: >-
+    All third-party callback and redirect URLs must be reachable from the Con
+    Edison network and must support TLS 1.2 or higher.
+data_custodians:
+  - name: Consolidated Edison Company of New York (CECONY)
+    authorization_base: https://www.coned.com/en/
+    api_base: https://api.coned.com/gbc/espi/1_1
+    test_api_base: https://apit.coned.com/gbc/espi/1_1
+  - name: Orange & Rockland Utilities (ORU)
+    authorization_base: https://www.oru.com/en/
+    note: >-
+      Same registration process and API contract; authorization must be routed
+      to the utility that serves the account being authorized.

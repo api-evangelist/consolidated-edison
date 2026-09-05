@@ -1,0 +1,2347 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "DCX GBC API V2",
+    "description": "The Green Button Connect API provides an access to RESTful services provided by ConEdison and Third Party Applications. These APIs allow application developers full access, in Green Button Format, to Energy Usage Information for the purpose of developing new Green Button Applications.Access to Green Button APIs requires an OAuth2 Access Token. Insert Access Tokens in the field labelled 'Access Token: ' at the top of the page prior to selecting the 'Try It Out!' button:"
+  },
+  "host": "provided-by-coned",
+  "basePath": "/gbc/espi/1_1",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/resource/ApplicationInformation/{applicationInformationId}": {
+      "get": {
+        "tags": [
+          "ApplicationInformation"
+        ],
+        "operationId": "getThirdPartyApplicationById",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "applicationInformationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Authorization": {
+      "get": {
+        "tags": [
+          "Authorization"
+        ],
+        "operationId": "Get all Third Party Authorizations",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "publishedMax",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "publishedMin",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "updatedMax",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "updatedMin",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Authorization/{authorizationId}": {
+      "get": {
+        "tags": [
+          "Authorization"
+        ],
+        "operationId": "Get Third Party Authorization by ID",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "authorizationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publishedMax",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "publishedMin",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "updatedMax",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "updatedMin",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/ReadServiceStatus": {
+      "get": {
+        "tags": [
+          "ServiceStatus"
+        ],
+        "operationId": "readServiceStatus",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/oauth/Token": {
+      "post": {
+        "tags": [
+          "Authorization"
+        ],
+        "operationId": "Token",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded",
+          "application/atom+xml"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "tokenRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Batch/Bulk/{bulkId}": {
+      "get": {
+        "tags": [
+          "Batch"
+        ],
+        "operationId": "getAllUsageDataInBatch",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "bulkId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "published-min",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "published-max",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Batch/Subscription/{subscriptionId}": {
+      "get": {
+        "tags": [
+          "Batch"
+        ],
+        "operationId": "getAllUsageDataForSubscriptionInBatch",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "published-min",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "published-max",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Batch/Subscription/{subscriptionId}/UsagePoint/{usagePointId}": {
+      "get": {
+        "tags": [
+          "Batch"
+        ],
+        "operationId": "getUsagePointBySubscriptionInBatch",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "usagePointId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "published-min",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "published-max",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Batch/RetailCustomer/{subscriptionId}": {
+      "get": {
+        "tags": [
+          "Batch"
+        ],
+        "operationId": "getCustomerInformationInBatch",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock": {
+      "get": {
+        "tags": [
+          "IntervalBlock"
+        ],
+        "operationId": "getAllIntervalBlocksForUsagePointMeterReadingInSubscription",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "usagePointId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "meterReadingId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "published-min",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "published-max",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "startIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock/{intervalBlockId}": {
+      "get": {
+        "tags": [
+          "IntervalBlock"
+        ],
+        "operationId": "getIntervalBlocksForUsagePointMeterReadingInSubscription",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "usagePointId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "meterReadingId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "intervalBlockId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "published-min",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "published-max",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "startIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/LocalTimeParameters": {
+      "get": {
+        "tags": [
+          "LocalTimeParameters"
+        ],
+        "operationId": "getLocalTimeParameters",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "startIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/LocalTimeParameters/{localTimeParameterId}": {
+      "get": {
+        "tags": [
+          "LocalTimeParameters"
+        ],
+        "operationId": "getLocalTimeParametersById",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "localTimeParameterId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading": {
+      "get": {
+        "tags": [
+          "MeterReading"
+        ],
+        "operationId": "getAllMeterReadingsForUsagePointInSubscription",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "usagePointId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}": {
+      "get": {
+        "tags": [
+          "MeterReading"
+        ],
+        "operationId": "getMeterReadingForUsagePointInSubscription",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "usagePointId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "meterReadingId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/ReadingType": {
+      "get": {
+        "tags": [
+          "ReadingType"
+        ],
+        "operationId": "getAllReadingTypes",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "startIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/ReadingType/{readingTypeId}": {
+      "get": {
+        "tags": [
+          "ReadingType"
+        ],
+        "operationId": "getReadingTypesById",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "readingTypeId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/RealTime/Batch/Bulk/{bulkId}": {
+      "get": {
+        "tags": [
+          "RealTimeBatch"
+        ],
+        "operationId": "getAllRealTimeUsageDataInBatch",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "bulkId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "published-min",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "published-max",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/RealTime/Batch/Subscription/{subscriptionId}": {
+      "get": {
+        "tags": [
+          "RealTimeBatch"
+        ],
+        "operationId": "getAllRealTimeUsageDataForSubscriptionInBatch",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "published-min",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "published-max",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/RealTime/Batch/Subscription/{subscriptionId}/UsagePoint/{usagePointId}": {
+      "get": {
+        "tags": [
+          "RealTimeBatch"
+        ],
+        "operationId": "getRealTimeUsagePointBySubscriptionInBatch",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "usagePointId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "published-min",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "published-max",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/RealTime/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock": {
+      "get": {
+        "tags": [
+          "RealTimeIntervalBlock"
+        ],
+        "operationId": "getAllRealTimeIntervalBlocksForUsagePointMeterReadingInSubscription",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "usagePointId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "meterReadingId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/RealTime/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock/{intervalBlockId}": {
+      "get": {
+        "tags": [
+          "RealTimeIntervalBlock"
+        ],
+        "operationId": "getRealTimeIntervalBlockForUsagePointMeterReadingInSubscription",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "usagePointId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "meterReadingId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "intervalBlockId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/RealTime/ReadingType": {
+      "get": {
+        "tags": [
+          "RealTimeReadingType"
+        ],
+        "operationId": "getAllRealTimeReadingTypes",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "startIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/RealTime/ReadingType/{readingTypeId}": {
+      "get": {
+        "tags": [
+          "RealTimeReadingType"
+        ],
+        "operationId": "getRealTimeReadingTypeById",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "readingTypeId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Customer/{subscriptionId}": {
+      "get": {
+        "tags": [
+          "RetailCustomer"
+        ],
+        "operationId": "getCustomerInformationBySubscription",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Customer/{subscriptionId}/CustomerAccount": {
+      "get": {
+        "tags": [
+          "RetailCustomer"
+        ],
+        "operationId": "getCustomerAccountInSubscription",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Customer/{subscriptionId}/CustomerAccount/{accountId}": {
+      "get": {
+        "tags": [
+          "RetailCustomer"
+        ],
+        "operationId": "getCustomerAccountByAccountIdInSubscription",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement": {
+      "get": {
+        "tags": [
+          "RetailCustomer"
+        ],
+        "operationId": "getCustomerAgreementByAccountIdInSubscription",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement/{customerAgreementId}": {
+      "get": {
+        "tags": [
+          "RetailCustomer"
+        ],
+        "operationId": "getCustomerAgreementByCustomerAgreementId",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerAgreementId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement/{customerAgreementId}/ServiceLocation": {
+      "get": {
+        "tags": [
+          "RetailCustomer"
+        ],
+        "operationId": "getAllServiceLocationByCustomerAgreementIdAndAccountIdInSubscription",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerAgreementId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement/{customerAgreementId}/ServiceLocation/{serviceLocationId}": {
+      "get": {
+        "tags": [
+          "RetailCustomer"
+        ],
+        "operationId": "getServiceLocationByServiceLocationId",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerAgreementId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceLocationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement/{customerAgreementId}/ServiceLocation/{serviceLocationId}/Meter": {
+      "get": {
+        "tags": [
+          "RetailCustomer"
+        ],
+        "operationId": "getAllMetersForServiceLocationInSubscription",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerAgreementId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceLocationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Customer/{subscriptionId}/CustomerAccount/{accountId}/CustomerAgreement/{customerAgreementId}/ServiceLocation/{serviceLocationId}/Meter/{serialNumber}": {
+      "get": {
+        "tags": [
+          "RetailCustomer"
+        ],
+        "operationId": "getMeterBySerialNumberId",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerAgreementId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceLocationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serialNumber",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/UsageSummary": {
+      "get": {
+        "tags": [
+          "ElectricPowerUsageSummary"
+        ],
+        "operationId": "getAllElectricPowerUsageSummaries",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "usagePointId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "published-min",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "published-max",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "startIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/UsageSummary/{usageSummaryId}": {
+      "post": {
+        "tags": [
+          "ElectricPowerUsageSummary"
+        ],
+        "operationId": "getAllElectricPowerUsageSummariesById",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "usagePointId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "usageSummaryId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Subscription/{subscriptionId}/UsagePoint": {
+      "get": {
+        "tags": [
+          "UsagePoint"
+        ],
+        "operationId": "getAllUsagePointsBySubscription",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}": {
+      "get": {
+        "tags": [
+          "UsagePoint"
+        ],
+        "operationId": "getUsagePointsForSubscription",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/atom+xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "usagePointId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Feed": {
+      "type": "object",
+      "properties": {
+        "Title": {
+          "$ref": "#/definitions/Title"
+        },
+        "Id": {
+          "type": "string"
+        },
+        "Updated": {
+          "type": "string"
+        },
+        "Link": {
+          "$ref": "#/definitions/Link"
+        },
+        "Entry": {
+          "$ref": "#/definitions/Entry"
+        },
+        "Espi": {
+          "type": "string"
+        },
+        "Xmlns": {
+          "type": "string"
+        }
+      }
+    },
+    "Title": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "string"
+        },
+        "Text": {
+          "type": "string"
+        }
+      }
+    },
+    "Link": {
+      "type": "object",
+      "properties": {
+        "Href": {
+          "type": "string"
+        },
+        "Rel": {
+          "type": "string"
+        }
+      }
+    },
+    "Entry": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Title": {
+          "$ref": "#/definitions/Title"
+        },
+        "Updated": {
+          "type": "string"
+        },
+        "Link": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        },
+        "Content": {
+          "$ref": "#/definitions/Content"
+        },
+        "Espi": {
+          "type": "string"
+        },
+        "Xsi": {
+          "type": "string"
+        }
+      }
+    },
+    "Content": {
+      "type": "object",
+      "properties": {
+        "ApplicationInformation": {
+          "$ref": "#/definitions/ApplicationInformationModel"
+        },
+        "Authorization": {
+          "$ref": "#/definitions/AuthorizationModel"
+        },
+        "Type": {
+          "type": "string"
+        }
+      }
+    },
+    "ApplicationInformationModel": {
+      "type": "object",
+      "properties": {
+        "DataCustodianId": {
+          "type": "string"
+        },
+        "DataCustodianApplicationStatus": {
+          "type": "string"
+        },
+        "ThirdPartyApplicationDescription": {
+          "type": "string"
+        },
+        "ThirdPartyApplicationStatus": {
+          "type": "string"
+        },
+        "ThirdPartyApplicationType": {
+          "type": "string"
+        },
+        "ThirdPartyApplicationUse": {
+          "type": "string"
+        },
+        "ThirdPartyPhone": {
+          "type": "string"
+        },
+        "AuthorizationServerUri": {
+          "type": "string"
+        },
+        "ThirdPartyNotifyUri": {
+          "type": "string"
+        },
+        "AuthorizationServerAuthorizationEndpoint": {
+          "type": "string"
+        },
+        "AuthorizationServerRegistrationEndpoint": {
+          "type": "string"
+        },
+        "AuthorizationServerTokenEndpoint": {
+          "type": "string"
+        },
+        "DataCustodianBulkRequestURI": {
+          "type": "string"
+        },
+        "DataCustodianResourceEndpoint": {
+          "type": "string"
+        },
+        "ThirdPartyScopeSelectionScreenURI": {
+          "type": "string"
+        },
+        "ThirdPartyUserPortalScreenURI": {
+          "type": "string"
+        },
+        "ClientSecret": {
+          "type": "string"
+        },
+        "LogoUri": {
+          "type": "string"
+        },
+        "ClientName": {
+          "type": "string"
+        },
+        "ClientUri": {
+          "type": "string"
+        },
+        "RedirectUri": {
+          "type": "string"
+        },
+        "ClientId": {
+          "type": "string"
+        },
+        "TosUri": {
+          "type": "string"
+        },
+        "PolicyUri": {
+          "type": "string"
+        },
+        "SoftwareId": {
+          "type": "string"
+        },
+        "SoftwareVersion": {
+          "type": "string"
+        },
+        "ClientIdIssuedAt": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "ClientSecretExpiresAt": {
+          "type": "string"
+        },
+        "Contacts": {
+          "type": "string"
+        },
+        "TokenEndpointAuthMethod": {
+          "type": "string"
+        },
+        "Scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "GrantTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ResponseTypes": {
+          "type": "string"
+        },
+        "RegistrationClientUri": {
+          "type": "string"
+        },
+        "RegistrationAccessToken": {
+          "format": "uuid",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "Id": {
+          "type": "string"
+        },
+        "AuthorizationChangeNotifyUri": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Published": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Updated": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Uuid": {
+          "type": "string"
+        },
+        "DataCustodianDefaultBatchResource": {
+          "type": "string"
+        },
+        "DataCustodianDefaultSubscriptionResource": {
+          "type": "string"
+        },
+        "DataCustodianThirdPartySelectionScreenURI": {
+          "type": "string"
+        },
+        "ThirdPartyApplicationName": {
+          "type": "string"
+        },
+        "ThirdPartyDataCustodianSelectionScreenURI": {
+          "type": "string"
+        },
+        "ThirdPartyLoginScreenURI": {
+          "type": "string"
+        },
+        "ThirdPartyApplicationPrefixCode": {
+          "type": "string"
+        },
+        "MarketerId": {
+          "type": "string"
+        },
+        "ShellAccountId": {
+          "type": "string"
+        },
+        "Contact": {
+          "type": "string"
+        },
+        "NotificationEmail": {
+          "type": "string"
+        },
+        "UseCertificationVersion": {
+          "type": "boolean"
+        }
+      }
+    },
+    "AuthorizationModel": {
+      "type": "object",
+      "properties": {
+        "IsDCAdminCalling": {
+          "type": "boolean"
+        },
+        "Status": {
+          "type": "string"
+        },
+        "ExpiresAt": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "Scope": {
+          "type": "string"
+        },
+        "TokenType": {
+          "type": "string"
+        },
+        "ResourceURI": {
+          "type": "string"
+        },
+        "AuthorizationUri": {
+          "type": "string"
+        },
+        "authorizePeriod": {
+          "$ref": "#/definitions/AuthorizationPeriod"
+        },
+        "ApplicationInformationId": {
+          "type": "string"
+        },
+        "MAID": {
+          "type": "string"
+        },
+        "authorizationid": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Published": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Updated": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Uuid": {
+          "type": "string"
+        },
+        "AccessToken": {
+          "type": "string"
+        },
+        "Scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Code": {
+          "type": "string"
+        },
+        "GrantType": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "PpDuration": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "PpStart": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "RetailCustomerId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscriptionModel"
+          }
+        },
+        "OktaUserID": {
+          "type": "string"
+        },
+        "AccountNumber": {
+          "type": "string"
+        },
+        "LastAccessedDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "RefreshToken": {
+          "type": "string"
+        }
+      }
+    },
+    "AuthorizationPeriod": {
+      "type": "object",
+      "properties": {
+        "ApDuration": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "ApStart": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "SubscriptionModel": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Published": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Updated": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "ApplicationInformationId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "AuthorizationId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "AccountNumber": {
+      "type": "object",
+      "properties": {
+        "Accounts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TokenRequest": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "clientSecret": {
+          "type": "string"
+        },
+        "redirect_uri": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "grant_type": {
+          "type": "string"
+        },
+        "refresh_token": {
+          "type": "string"
+        }
+      }
+    },
+    "LastMonthDates": {
+      "type": "object",
+      "properties": {
+        "LastMonthFirstDay": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "LastMonthLastDay": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    }
+  }
+}
