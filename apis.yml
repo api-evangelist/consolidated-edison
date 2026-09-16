@@ -12,6 +12,20 @@ tags:
 - NAESB
 - Natural Gas
 - New York
+- Authentication
+- Steam
+- Utility
+tags_raw:
+- AMI
+- Demand Response
+- ESPI
+- Energy
+- Fortune 500
+- Green Button
+- Interval Data
+- NAESB
+- Natural Gas
+- New York
 - OAuth2
 - Steam
 - Utility
@@ -60,52 +74,6 @@ description: 'Consolidated Edison, Inc. (Con Edison) is a Fortune 500 investor-o
   Access is free but not self-service - a Data Security Agreement and a 30-60 day onboarding come
   first. Orange & Rockland runs the identical contract.'
 apis:
-- aid: consolidated-edison:green-button-connect
-  name: Green Button Connect My Data
-  tags:
-  - Energy
-  - Green Button
-  - Authentication
-  - Smart Meter
-  - Usage Data
-  tags_raw:
-  - Energy
-  - Green Button
-  - OAuth2
-  - Smart Meter
-  - Usage Data
-  humanURL: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
-  properties:
-  - url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
-    type: Documentation
-  - url: https://www.coned.com/en/business-partners/access-customer-data
-    type: Authentication
-  - url: openapi/consolidated-edison-green-button-connect-openapi.yml
-    type: OpenAPI
-  - url: https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
-    type: Swagger
-    name: DCX GBC API V2 — Swagger 2.0 definition published by Con Edison
-  - url: https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/postman-collection.json?sp=r&st=2026-04-28T15:40:29Z&se=2031-08-29T23:55:29Z&spr=https&sv=2025-11-05&sr=b&sig=rrSK9xQA4obHLvHoXI9Q2N61Z2KDHANFrKJp3cMoygU%3D
-    type: Postman
-    name: GBC Certification Third party V3.3
-  - url: https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
-    type: APIReference
-  - url: https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
-    type: GettingStarted
-    name: Green Button Connect Third-Party Technical Onboarding Document v4.4
-  - url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party/registration-form
-    type: SignUp
-  - url: overlays/consolidated-edison-green-button-connect-overlay.yaml
-    type: Overlay
-  - url: mcp/consolidated-edison-mcp.yml
-    type: X-MCPServerCandidate
-  description: Green Button Connect My Data is the OAuth2-based ESPI service that lets Con Edison
-    customers authorize a registered third party to receive their interval energy usage and account
-    data on a recurring basis. Third parties register through Con Edison's onboarding process to
-    obtain client credentials, then exchange them for access tokens that retrieve ESPI Atom/XML resources
-    for usage points, meter readings, and electric power usage summaries.
-  baseURL: https://api.coned.com/gbc/espi/1_1
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/consolidated-edison.png
 - aid: consolidated-edison:green-button-download
   name: Green Button Download My Data
   tags:
@@ -121,11 +89,451 @@ apis:
     type: Documentation
   - url: https://www.coned.com/en/save-money/make-better-energychoices-with-green-button
     type: GettingStarted
-  description: Customer-driven file export that lets Con Edison residential and small commercial
-    accounts download up to one year of smart-meter interval data as CSV or ESPI XML directly from
-    the My Account portal. Useful for one-shot analytics, audits, and migrating data into third-party
-    tools without requiring an OAuth integration.
+  description: >-
+    Customer-driven file export that lets Con Edison residential and small commercial accounts download
+    up to one year of smart-meter interval data as CSV or ESPI XML directly from the My Account portal.
+    Useful for one-shot analytics, audits, and migrating data into third-party tools without requiring
+    an OAuth integration.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/consolidated-edison.png
+- aid: consolidated-edison:consolidated-edison-applicationinformation-api
+  name: Consolidated Edison Application Information API
+  description: >-
+    The ApplicationInformation API from Consolidated Edison — 1 operation(s) for applicationinformation.
+  humanURL: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  baseURL: https://api.coned.com/gbc/espi/1_1
+  tags:
+  - ApplicationInformation
+  properties:
+  - type: OpenAPI
+    url: openapi/consolidated-edison-applicationinformation-api-openapi.yml
+  - type: Documentation
+    url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  - type: Authentication
+    url: https://www.coned.com/en/business-partners/access-customer-data
+  - type: Swagger
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: Postman
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/postman-collection.json?sp=r&st=2026-04-28T15:40:29Z&se=2031-08-29T23:55:29Z&spr=https&sv=2025-11-05&sr=b&sig=rrSK9xQA4obHLvHoXI9Q2N61Z2KDHANFrKJp3cMoygU%3D
+  - type: APIReference
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: GettingStarted
+    url: >-
+      https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+  - type: SignUp
+    url: >-
+      https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party/registration-form
+  - type: X-MCPServerCandidate
+    url: mcp/consolidated-edison-mcp.yml
+- aid: consolidated-edison:consolidated-edison-authorization-api
+  name: Consolidated Edison Authorization API
+  description: The Authorization API from Consolidated Edison — 3 operation(s) for authorization.
+  humanURL: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  baseURL: https://api.coned.com/gbc/espi/1_1
+  tags:
+  - Authorization
+  properties:
+  - type: OpenAPI
+    url: openapi/consolidated-edison-authorization-api-openapi.yml
+  - type: Documentation
+    url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  - type: Authentication
+    url: https://www.coned.com/en/business-partners/access-customer-data
+  - type: Swagger
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: Postman
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/postman-collection.json?sp=r&st=2026-04-28T15:40:29Z&se=2031-08-29T23:55:29Z&spr=https&sv=2025-11-05&sr=b&sig=rrSK9xQA4obHLvHoXI9Q2N61Z2KDHANFrKJp3cMoygU%3D
+  - type: APIReference
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: GettingStarted
+    url: >-
+      https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+  - type: SignUp
+    url: >-
+      https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party/registration-form
+  - type: X-MCPServerCandidate
+    url: mcp/consolidated-edison-mcp.yml
+- aid: consolidated-edison:consolidated-edison-batch-api
+  name: Consolidated Edison Batch API
+  description: The Batch API from Consolidated Edison — 4 operation(s) for batch.
+  humanURL: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  baseURL: https://api.coned.com/gbc/espi/1_1
+  tags:
+  - Batch
+  properties:
+  - type: OpenAPI
+    url: openapi/consolidated-edison-batch-api-openapi.yml
+  - type: Documentation
+    url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  - type: Authentication
+    url: https://www.coned.com/en/business-partners/access-customer-data
+  - type: Swagger
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: Postman
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/postman-collection.json?sp=r&st=2026-04-28T15:40:29Z&se=2031-08-29T23:55:29Z&spr=https&sv=2025-11-05&sr=b&sig=rrSK9xQA4obHLvHoXI9Q2N61Z2KDHANFrKJp3cMoygU%3D
+  - type: APIReference
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: GettingStarted
+    url: >-
+      https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+  - type: SignUp
+    url: >-
+      https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party/registration-form
+  - type: X-MCPServerCandidate
+    url: mcp/consolidated-edison-mcp.yml
+- aid: consolidated-edison:consolidated-edison-electricpowerusagesummary-api
+  name: Consolidated Edison Electric Power Usage Summary API
+  description: >-
+    The ElectricPowerUsageSummary API from Consolidated Edison — 2 operation(s) for electricpowerusagesummary.
+  humanURL: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  baseURL: https://api.coned.com/gbc/espi/1_1
+  tags:
+  - ElectricPowerUsageSummary
+  properties:
+  - type: OpenAPI
+    url: openapi/consolidated-edison-electricpowerusagesummary-api-openapi.yml
+  - type: Documentation
+    url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  - type: Authentication
+    url: https://www.coned.com/en/business-partners/access-customer-data
+  - type: Swagger
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: Postman
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/postman-collection.json?sp=r&st=2026-04-28T15:40:29Z&se=2031-08-29T23:55:29Z&spr=https&sv=2025-11-05&sr=b&sig=rrSK9xQA4obHLvHoXI9Q2N61Z2KDHANFrKJp3cMoygU%3D
+  - type: APIReference
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: GettingStarted
+    url: >-
+      https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+  - type: SignUp
+    url: >-
+      https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party/registration-form
+  - type: X-MCPServerCandidate
+    url: mcp/consolidated-edison-mcp.yml
+- aid: consolidated-edison:consolidated-edison-intervalblock-api
+  name: Consolidated Edison Interval Block API
+  description: The IntervalBlock API from Consolidated Edison — 2 operation(s) for intervalblock.
+  humanURL: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  baseURL: https://api.coned.com/gbc/espi/1_1
+  tags:
+  - IntervalBlock
+  properties:
+  - type: OpenAPI
+    url: openapi/consolidated-edison-intervalblock-api-openapi.yml
+  - type: Documentation
+    url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  - type: Authentication
+    url: https://www.coned.com/en/business-partners/access-customer-data
+  - type: Swagger
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: Postman
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/postman-collection.json?sp=r&st=2026-04-28T15:40:29Z&se=2031-08-29T23:55:29Z&spr=https&sv=2025-11-05&sr=b&sig=rrSK9xQA4obHLvHoXI9Q2N61Z2KDHANFrKJp3cMoygU%3D
+  - type: APIReference
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: GettingStarted
+    url: >-
+      https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+  - type: SignUp
+    url: >-
+      https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party/registration-form
+  - type: X-MCPServerCandidate
+    url: mcp/consolidated-edison-mcp.yml
+- aid: consolidated-edison:consolidated-edison-localtimeparameters-api
+  name: Consolidated Edison Local Time Parameters API
+  description: >-
+    The LocalTimeParameters API from Consolidated Edison — 2 operation(s) for localtimeparameters.
+  humanURL: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  baseURL: https://api.coned.com/gbc/espi/1_1
+  tags:
+  - LocalTimeParameters
+  properties:
+  - type: OpenAPI
+    url: openapi/consolidated-edison-localtimeparameters-api-openapi.yml
+  - type: Documentation
+    url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  - type: Authentication
+    url: https://www.coned.com/en/business-partners/access-customer-data
+  - type: Swagger
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: Postman
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/postman-collection.json?sp=r&st=2026-04-28T15:40:29Z&se=2031-08-29T23:55:29Z&spr=https&sv=2025-11-05&sr=b&sig=rrSK9xQA4obHLvHoXI9Q2N61Z2KDHANFrKJp3cMoygU%3D
+  - type: APIReference
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: GettingStarted
+    url: >-
+      https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+  - type: SignUp
+    url: >-
+      https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party/registration-form
+  - type: X-MCPServerCandidate
+    url: mcp/consolidated-edison-mcp.yml
+- aid: consolidated-edison:consolidated-edison-meterreading-api
+  name: Consolidated Edison Meter Reading API
+  description: The MeterReading API from Consolidated Edison — 2 operation(s) for meterreading.
+  humanURL: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  baseURL: https://api.coned.com/gbc/espi/1_1
+  tags:
+  - MeterReading
+  properties:
+  - type: OpenAPI
+    url: openapi/consolidated-edison-meterreading-api-openapi.yml
+  - type: Documentation
+    url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  - type: Authentication
+    url: https://www.coned.com/en/business-partners/access-customer-data
+  - type: Swagger
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: Postman
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/postman-collection.json?sp=r&st=2026-04-28T15:40:29Z&se=2031-08-29T23:55:29Z&spr=https&sv=2025-11-05&sr=b&sig=rrSK9xQA4obHLvHoXI9Q2N61Z2KDHANFrKJp3cMoygU%3D
+  - type: APIReference
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: GettingStarted
+    url: >-
+      https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+  - type: SignUp
+    url: >-
+      https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party/registration-form
+  - type: X-MCPServerCandidate
+    url: mcp/consolidated-edison-mcp.yml
+- aid: consolidated-edison:consolidated-edison-readingtype-api
+  name: Consolidated Edison Reading Type API
+  description: The ReadingType API from Consolidated Edison — 2 operation(s) for readingtype.
+  humanURL: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  baseURL: https://api.coned.com/gbc/espi/1_1
+  tags:
+  - ReadingType
+  properties:
+  - type: OpenAPI
+    url: openapi/consolidated-edison-readingtype-api-openapi.yml
+  - type: Documentation
+    url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  - type: Authentication
+    url: https://www.coned.com/en/business-partners/access-customer-data
+  - type: Swagger
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: Postman
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/postman-collection.json?sp=r&st=2026-04-28T15:40:29Z&se=2031-08-29T23:55:29Z&spr=https&sv=2025-11-05&sr=b&sig=rrSK9xQA4obHLvHoXI9Q2N61Z2KDHANFrKJp3cMoygU%3D
+  - type: APIReference
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: GettingStarted
+    url: >-
+      https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+  - type: SignUp
+    url: >-
+      https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party/registration-form
+  - type: X-MCPServerCandidate
+    url: mcp/consolidated-edison-mcp.yml
+- aid: consolidated-edison:consolidated-edison-realtimebatch-api
+  name: Consolidated Edison Real Time Batch API
+  description: The RealTimeBatch API from Consolidated Edison — 3 operation(s) for realtimebatch.
+  humanURL: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  baseURL: https://api.coned.com/gbc/espi/1_1
+  tags:
+  - RealTimeBatch
+  properties:
+  - type: OpenAPI
+    url: openapi/consolidated-edison-realtimebatch-api-openapi.yml
+  - type: Documentation
+    url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  - type: Authentication
+    url: https://www.coned.com/en/business-partners/access-customer-data
+  - type: Swagger
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: Postman
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/postman-collection.json?sp=r&st=2026-04-28T15:40:29Z&se=2031-08-29T23:55:29Z&spr=https&sv=2025-11-05&sr=b&sig=rrSK9xQA4obHLvHoXI9Q2N61Z2KDHANFrKJp3cMoygU%3D
+  - type: APIReference
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: GettingStarted
+    url: >-
+      https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+  - type: SignUp
+    url: >-
+      https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party/registration-form
+  - type: X-MCPServerCandidate
+    url: mcp/consolidated-edison-mcp.yml
+- aid: consolidated-edison:consolidated-edison-realtimeintervalblock-api
+  name: Consolidated Edison Real Time Interval Block API
+  description: >-
+    The RealTimeIntervalBlock API from Consolidated Edison — 2 operation(s) for realtimeintervalblock.
+  humanURL: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  baseURL: https://api.coned.com/gbc/espi/1_1
+  tags:
+  - RealTimeIntervalBlock
+  properties:
+  - type: OpenAPI
+    url: openapi/consolidated-edison-realtimeintervalblock-api-openapi.yml
+  - type: Documentation
+    url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  - type: Authentication
+    url: https://www.coned.com/en/business-partners/access-customer-data
+  - type: Swagger
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: Postman
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/postman-collection.json?sp=r&st=2026-04-28T15:40:29Z&se=2031-08-29T23:55:29Z&spr=https&sv=2025-11-05&sr=b&sig=rrSK9xQA4obHLvHoXI9Q2N61Z2KDHANFrKJp3cMoygU%3D
+  - type: APIReference
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: GettingStarted
+    url: >-
+      https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+  - type: SignUp
+    url: >-
+      https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party/registration-form
+  - type: X-MCPServerCandidate
+    url: mcp/consolidated-edison-mcp.yml
+- aid: consolidated-edison:consolidated-edison-realtimereadingtype-api
+  name: Consolidated Edison Real Time Reading Type API
+  description: >-
+    The RealTimeReadingType API from Consolidated Edison — 2 operation(s) for realtimereadingtype.
+  humanURL: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  baseURL: https://api.coned.com/gbc/espi/1_1
+  tags:
+  - RealTimeReadingType
+  properties:
+  - type: OpenAPI
+    url: openapi/consolidated-edison-realtimereadingtype-api-openapi.yml
+  - type: Documentation
+    url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  - type: Authentication
+    url: https://www.coned.com/en/business-partners/access-customer-data
+  - type: Swagger
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: Postman
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/postman-collection.json?sp=r&st=2026-04-28T15:40:29Z&se=2031-08-29T23:55:29Z&spr=https&sv=2025-11-05&sr=b&sig=rrSK9xQA4obHLvHoXI9Q2N61Z2KDHANFrKJp3cMoygU%3D
+  - type: APIReference
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: GettingStarted
+    url: >-
+      https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+  - type: SignUp
+    url: >-
+      https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party/registration-form
+  - type: X-MCPServerCandidate
+    url: mcp/consolidated-edison-mcp.yml
+- aid: consolidated-edison:consolidated-edison-retailcustomer-api
+  name: Consolidated Edison Retail Customer API
+  description: The RetailCustomer API from Consolidated Edison — 9 operation(s) for retailcustomer.
+  humanURL: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  baseURL: https://api.coned.com/gbc/espi/1_1
+  tags:
+  - RetailCustomer
+  properties:
+  - type: OpenAPI
+    url: openapi/consolidated-edison-retailcustomer-api-openapi.yml
+  - type: Documentation
+    url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  - type: Authentication
+    url: https://www.coned.com/en/business-partners/access-customer-data
+  - type: Swagger
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: Postman
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/postman-collection.json?sp=r&st=2026-04-28T15:40:29Z&se=2031-08-29T23:55:29Z&spr=https&sv=2025-11-05&sr=b&sig=rrSK9xQA4obHLvHoXI9Q2N61Z2KDHANFrKJp3cMoygU%3D
+  - type: APIReference
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: GettingStarted
+    url: >-
+      https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+  - type: SignUp
+    url: >-
+      https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party/registration-form
+  - type: X-MCPServerCandidate
+    url: mcp/consolidated-edison-mcp.yml
+- aid: consolidated-edison:consolidated-edison-servicestatus-api
+  name: Consolidated Edison Service Status API
+  description: The ServiceStatus API from Consolidated Edison — 1 operation(s) for servicestatus.
+  humanURL: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  baseURL: https://api.coned.com/gbc/espi/1_1
+  tags:
+  - ServiceStatus
+  properties:
+  - type: OpenAPI
+    url: openapi/consolidated-edison-servicestatus-api-openapi.yml
+  - type: Documentation
+    url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  - type: Authentication
+    url: https://www.coned.com/en/business-partners/access-customer-data
+  - type: Swagger
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: Postman
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/postman-collection.json?sp=r&st=2026-04-28T15:40:29Z&se=2031-08-29T23:55:29Z&spr=https&sv=2025-11-05&sr=b&sig=rrSK9xQA4obHLvHoXI9Q2N61Z2KDHANFrKJp3cMoygU%3D
+  - type: APIReference
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: GettingStarted
+    url: >-
+      https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+  - type: SignUp
+    url: >-
+      https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party/registration-form
+  - type: X-MCPServerCandidate
+    url: mcp/consolidated-edison-mcp.yml
+- aid: consolidated-edison:consolidated-edison-usagepoint-api
+  name: Consolidated Edison Usage Point API
+  description: The UsagePoint API from Consolidated Edison — 2 operation(s) for usagepoint.
+  humanURL: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  baseURL: https://api.coned.com/gbc/espi/1_1
+  tags:
+  - UsagePoint
+  properties:
+  - type: OpenAPI
+    url: openapi/consolidated-edison-usagepoint-api-openapi.yml
+  - type: Documentation
+    url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+  - type: Authentication
+    url: https://www.coned.com/en/business-partners/access-customer-data
+  - type: Swagger
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: Postman
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/postman-collection.json?sp=r&st=2026-04-28T15:40:29Z&se=2031-08-29T23:55:29Z&spr=https&sv=2025-11-05&sr=b&sig=rrSK9xQA4obHLvHoXI9Q2N61Z2KDHANFrKJp3cMoygU%3D
+  - type: APIReference
+    url: >-
+      https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D
+  - type: GettingStarted
+    url: >-
+      https://edge-e-dcxprod-web-bechbkdqagefb9ge.a03.azurefd.net/-/media/files/coned/documents/accountandbilling/share-my-data/onboarding-doc.pdf
+  - type: SignUp
+    url: >-
+      https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party/registration-form
+  - type: X-MCPServerCandidate
+    url: mcp/consolidated-edison-mcp.yml
 common:
 - type: AgenticAccess
   url: agentic-access/consolidated-edison-agentic-access.yml
