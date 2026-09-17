@@ -472,16 +472,16 @@ apis:
       https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party/registration-form
   - type: X-MCPServerCandidate
     url: mcp/consolidated-edison-mcp.yml
-- aid: consolidated-edison:consolidated-edison-servicestatus-api
-  name: Consolidated Edison Service Status API
-  description: The ServiceStatus API from Consolidated Edison — 1 operation(s) for servicestatus.
+- aid: consolidated-edison:consolidated-edison-usagepoint-api
+  name: Consolidated Edison Usage Point API
+  description: The UsagePoint API from Consolidated Edison — 2 operation(s) for usagepoint.
   humanURL: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
   baseURL: https://api.coned.com/gbc/espi/1_1
   tags:
-  - ServiceStatus
+  - UsagePoint
   properties:
   - type: OpenAPI
-    url: openapi/consolidated-edison-servicestatus-api-openapi.yml
+    url: openapi/consolidated-edison-usagepoint-api-openapi.yml
   - type: Documentation
     url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
   - type: Authentication
@@ -503,16 +503,16 @@ apis:
       https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party/registration-form
   - type: X-MCPServerCandidate
     url: mcp/consolidated-edison-mcp.yml
-- aid: consolidated-edison:consolidated-edison-usagepoint-api
-  name: Consolidated Edison Usage Point API
-  description: The UsagePoint API from Consolidated Edison — 2 operation(s) for usagepoint.
-  humanURL: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
+- aid: consolidated-edison:consolidated-edison-service-status-api
+  name: Consolidated Edison Service Status API
+  description: The Service Status API from Consolidated Edison — 1 operation(s) for service status.
+  humanURL: https://www.coned.com/en/save-money/make-better-energychoices-with-green-button
   baseURL: https://api.coned.com/gbc/espi/1_1
   tags:
-  - UsagePoint
+  - Service Status
   properties:
   - type: OpenAPI
-    url: openapi/consolidated-edison-usagepoint-api-openapi.yml
+    url: openapi/consolidated-edison-service-status-api-openapi.yml
   - type: Documentation
     url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
   - type: Authentication
