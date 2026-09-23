@@ -1,0 +1,151 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: DCX GBC API V2 Authorization API
+  description: 'The Green Button Connect API provides an access to RESTful services provided by ConEdison and Third Party Applications. These APIs allow application developers full access, in Green Button Format, to Energy Usage Information for the purpose of developing new Green Button Applications.Access to Green Button APIs requires an OAuth2 Access Token. Insert Access Tokens in the field labelled ''Access Token: '' at the top of the page prior to selecting the ''Try It Out!'' button:'
+servers:
+- url: https://provided-by-coned/gbc/espi/1_1
+tags:
+- name: Authorization
+paths:
+  /resource/Authorization:
+    get:
+      tags:
+      - Authorization
+      operationId: Get all Third Party Authorizations
+      parameters:
+      - name: publishedMax
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: publishedMin
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: updatedMax
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: updatedMin
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+        '401':
+          description: Unauthorized
+      servers:
+      - url: https://provided-by-coned/gbc/espi/1_1
+      summary: Get all third party authorizations
+      x-summary-source: derived
+  /resource/Authorization/{authorizationId}:
+    get:
+      tags:
+      - Authorization
+      operationId: Get Third Party Authorization by ID
+      parameters:
+      - name: authorizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: publishedMax
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: publishedMin
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: updatedMax
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: updatedMin
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+        '401':
+          description: Unauthorized
+      servers:
+      - url: https://provided-by-coned/gbc/espi/1_1
+      summary: Get third party authorization by ID
+      x-summary-source: derived
+  /oauth/Token:
+    post:
+      tags:
+      - Authorization
+      operationId: Token
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+      servers:
+      - url: https://provided-by-coned/gbc/espi/1_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TokenRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/TokenRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/TokenRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRequest'
+          application/atom+xml:
+            schema:
+              $ref: '#/components/schemas/TokenRequest'
+        required: true
+      summary: Token
+      x-summary-source: derived
+components:
+  schemas:
+    TokenRequest:
+      type: object
+      properties:
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        redirect_uri:
+          type: string
+        scope:
+          type: string
+        code:
+          type: string
+        grant_type:
+          type: string
+        refresh_token:
+          type: string

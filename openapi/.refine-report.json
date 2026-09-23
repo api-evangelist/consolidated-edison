@@ -1,0 +1,65 @@
+{
+  "provider": "consolidated-edison",
+  "sources": [
+    "_original/consolidated-edison-green-button-connect-openapi.json"
+  ],
+  "outputs": [
+    "consolidated-edison-applicationinformation-api-openapi.yml",
+    "consolidated-edison-authorization-api-openapi.yml",
+    "consolidated-edison-batch-api-openapi.yml",
+    "consolidated-edison-electricpowerusagesummary-api-openapi.yml",
+    "consolidated-edison-intervalblock-api-openapi.yml",
+    "consolidated-edison-localtimeparameters-api-openapi.yml",
+    "consolidated-edison-meterreading-api-openapi.yml",
+    "consolidated-edison-readingtype-api-openapi.yml",
+    "consolidated-edison-realtimebatch-api-openapi.yml",
+    "consolidated-edison-realtimeintervalblock-api-openapi.yml",
+    "consolidated-edison-realtimereadingtype-api-openapi.yml",
+    "consolidated-edison-retailcustomer-api-openapi.yml",
+    "consolidated-edison-servicestatus-api-openapi.yml",
+    "consolidated-edison-usagepoint-api-openapi.yml"
+  ],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "1 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "consolidated-edison-green-button-connect-openapi.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "consolidated-edison-green-button-connect-openapi.json: declared missing tag: ApplicationInformation",
+    "consolidated-edison-green-button-connect-openapi.json: declared missing tag: Authorization",
+    "consolidated-edison-green-button-connect-openapi.json: declared missing tag: Batch",
+    "consolidated-edison-green-button-connect-openapi.json: declared missing tag: ElectricPowerUsageSummary",
+    "consolidated-edison-green-button-connect-openapi.json: declared missing tag: IntervalBlock",
+    "consolidated-edison-green-button-connect-openapi.json: declared missing tag: LocalTimeParameters",
+    "consolidated-edison-green-button-connect-openapi.json: declared missing tag: MeterReading",
+    "consolidated-edison-green-button-connect-openapi.json: declared missing tag: ReadingType",
+    "consolidated-edison-green-button-connect-openapi.json: declared missing tag: RealTimeBatch",
+    "consolidated-edison-green-button-connect-openapi.json: declared missing tag: RealTimeIntervalBlock",
+    "consolidated-edison-green-button-connect-openapi.json: declared missing tag: RealTimeReadingType",
+    "consolidated-edison-green-button-connect-openapi.json: declared missing tag: RetailCustomer",
+    "consolidated-edison-green-button-connect-openapi.json: declared missing tag: ServiceStatus",
+    "consolidated-edison-green-button-connect-openapi.json: declared missing tag: UsagePoint",
+    "superseded outputs removed: consolidated-edison-service-status-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 15 total)"
+  ],
+  "skipped": [
+    "_original/consolidated-edison-green-button-connect-openapi.yml: archived document superseded by a larger archived document",
+    "consolidated-edison-applicationinformation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "consolidated-edison-authorization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "consolidated-edison-batch-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "consolidated-edison-electricpowerusagesummary-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "consolidated-edison-intervalblock-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "consolidated-edison-localtimeparameters-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "consolidated-edison-meterreading-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "consolidated-edison-readingtype-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "consolidated-edison-realtimebatch-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "consolidated-edison-realtimeintervalblock-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "consolidated-edison-realtimereadingtype-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "consolidated-edison-retailcustomer-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "consolidated-edison-service-status-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "consolidated-edison-usagepoint-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

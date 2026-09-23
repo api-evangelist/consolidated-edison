@@ -1,0 +1,87 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: DCX GBC API V2 Electric Power Usage Summary API
+  description: 'The Green Button Connect API provides an access to RESTful services provided by ConEdison and Third Party Applications. These APIs allow application developers full access, in Green Button Format, to Energy Usage Information for the purpose of developing new Green Button Applications.Access to Green Button APIs requires an OAuth2 Access Token. Insert Access Tokens in the field labelled ''Access Token: '' at the top of the page prior to selecting the ''Try It Out!'' button:'
+servers:
+- url: https://provided-by-coned/gbc/espi/1_1
+tags:
+- name: ElectricPowerUsageSummary
+paths:
+  /resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/UsageSummary:
+    get:
+      tags:
+      - ElectricPowerUsageSummary
+      operationId: getAllElectricPowerUsageSummaries
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: usagePointId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: published-min
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: published-max
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: startIndex
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+        '401':
+          description: Unauthorized
+      servers:
+      - url: https://provided-by-coned/gbc/espi/1_1
+      summary: Get all electric power usage summaries
+      x-summary-source: derived
+  /resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/UsageSummary/{usageSummaryId}:
+    post:
+      tags:
+      - ElectricPowerUsageSummary
+      operationId: getAllElectricPowerUsageSummariesById
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: usagePointId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: usageSummaryId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+        '401':
+          description: Unauthorized
+      servers:
+      - url: https://provided-by-coned/gbc/espi/1_1
+      summary: Get all electric power usage summaries by id
+      x-summary-source: derived

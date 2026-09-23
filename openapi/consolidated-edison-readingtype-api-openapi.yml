@@ -1,0 +1,61 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: DCX GBC API V2 Reading Type API
+  description: 'The Green Button Connect API provides an access to RESTful services provided by ConEdison and Third Party Applications. These APIs allow application developers full access, in Green Button Format, to Energy Usage Information for the purpose of developing new Green Button Applications.Access to Green Button APIs requires an OAuth2 Access Token. Insert Access Tokens in the field labelled ''Access Token: '' at the top of the page prior to selecting the ''Try It Out!'' button:'
+servers:
+- url: https://provided-by-coned/gbc/espi/1_1
+tags:
+- name: ReadingType
+paths:
+  /resource/ReadingType:
+    get:
+      tags:
+      - ReadingType
+      operationId: getAllReadingTypes
+      parameters:
+      - name: startIndex
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+        '401':
+          description: Unauthorized
+      servers:
+      - url: https://provided-by-coned/gbc/espi/1_1
+      summary: Get all reading types
+      x-summary-source: derived
+  /resource/ReadingType/{readingTypeId}:
+    get:
+      tags:
+      - ReadingType
+      operationId: getReadingTypesById
+      parameters:
+      - name: readingTypeId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: startIndex
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+        '401':
+          description: Unauthorized
+      servers:
+      - url: https://provided-by-coned/gbc/espi/1_1
+      summary: Get reading types by id
+      x-summary-source: derived

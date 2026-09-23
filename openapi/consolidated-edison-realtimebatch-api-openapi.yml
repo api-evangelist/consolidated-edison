@@ -1,0 +1,117 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: DCX GBC API V2 Real Time Batch API
+  description: 'The Green Button Connect API provides an access to RESTful services provided by ConEdison and Third Party Applications. These APIs allow application developers full access, in Green Button Format, to Energy Usage Information for the purpose of developing new Green Button Applications.Access to Green Button APIs requires an OAuth2 Access Token. Insert Access Tokens in the field labelled ''Access Token: '' at the top of the page prior to selecting the ''Try It Out!'' button:'
+servers:
+- url: https://provided-by-coned/gbc/espi/1_1
+tags:
+- name: RealTimeBatch
+paths:
+  /resource/RealTime/Batch/Bulk/{bulkId}:
+    get:
+      tags:
+      - RealTimeBatch
+      operationId: getAllRealTimeUsageDataInBatch
+      parameters:
+      - name: bulkId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: published-min
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: published-max
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+        '401':
+          description: Unauthorized
+      servers:
+      - url: https://provided-by-coned/gbc/espi/1_1
+      summary: Get all real time usage data in batch
+      x-summary-source: derived
+  /resource/RealTime/Batch/Subscription/{subscriptionId}:
+    get:
+      tags:
+      - RealTimeBatch
+      operationId: getAllRealTimeUsageDataForSubscriptionInBatch
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: published-min
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: published-max
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+        '401':
+          description: Unauthorized
+      servers:
+      - url: https://provided-by-coned/gbc/espi/1_1
+      summary: Get all real time usage data for subscription in batch
+      x-summary-source: derived
+  /resource/RealTime/Batch/Subscription/{subscriptionId}/UsagePoint/{usagePointId}:
+    get:
+      tags:
+      - RealTimeBatch
+      operationId: getRealTimeUsagePointBySubscriptionInBatch
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: usagePointId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: published-min
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: published-max
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+        '401':
+          description: Unauthorized
+      servers:
+      - url: https://provided-by-coned/gbc/espi/1_1
+      summary: Get real time usage point by subscription in batch
+      x-summary-source: derived

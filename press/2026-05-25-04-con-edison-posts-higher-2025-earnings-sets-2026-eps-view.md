@@ -1,7 +1,9 @@
 ---
 title: Con Edison posts higher 2025 earnings, sets 2026 EPS view
 url: https://www.stocktitan.net/sec-filings/ED/8-k-consolidated-edison-inc-reports-material-event-0907b1b03c4d.html
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Consolidated Edison" press release artificial intelligence'
 position: 4
 source: serpapi-google

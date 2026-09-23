@@ -1,0 +1,71 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: DCX GBC API V2 Usage Point API
+  description: 'The Green Button Connect API provides an access to RESTful services provided by ConEdison and Third Party Applications. These APIs allow application developers full access, in Green Button Format, to Energy Usage Information for the purpose of developing new Green Button Applications.Access to Green Button APIs requires an OAuth2 Access Token. Insert Access Tokens in the field labelled ''Access Token: '' at the top of the page prior to selecting the ''Try It Out!'' button:'
+servers:
+- url: https://provided-by-coned/gbc/espi/1_1
+tags:
+- name: UsagePoint
+paths:
+  /resource/Subscription/{subscriptionId}/UsagePoint:
+    get:
+      tags:
+      - UsagePoint
+      operationId: getAllUsagePointsBySubscription
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: startIndex
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+        '401':
+          description: Unauthorized
+      servers:
+      - url: https://provided-by-coned/gbc/espi/1_1
+      summary: Get all usage points by subscription
+      x-summary-source: derived
+  /resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}:
+    get:
+      tags:
+      - UsagePoint
+      operationId: getUsagePointsForSubscription
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: usagePointId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: startIndex
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+        '401':
+          description: Unauthorized
+      servers:
+      - url: https://provided-by-coned/gbc/espi/1_1
+      summary: Get usage points for subscription
+      x-summary-source: derived
