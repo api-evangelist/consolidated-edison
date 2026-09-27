@@ -12,7 +12,7 @@ paths:
     get:
       tags:
       - Authorization
-      operationId: Get all Third Party Authorizations
+      operationId: GetAllThirdPartyAuthorizations
       parameters:
       - name: publishedMax
         in: query
@@ -49,11 +49,13 @@ paths:
       - url: https://provided-by-coned/gbc/espi/1_1
       summary: Get all third party authorizations
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get all Third Party Authorizations
   /resource/Authorization/{authorizationId}:
     get:
       tags:
       - Authorization
-      operationId: Get Third Party Authorization by ID
+      operationId: GetThirdPartyAuthorizationByID
       parameters:
       - name: authorizationId
         in: path
@@ -95,6 +97,8 @@ paths:
       - url: https://provided-by-coned/gbc/espi/1_1
       summary: Get third party authorization by ID
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Third Party Authorization by ID
   /oauth/Token:
     post:
       tags:
