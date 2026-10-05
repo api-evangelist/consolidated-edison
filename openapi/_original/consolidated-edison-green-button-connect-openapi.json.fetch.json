@@ -1,0 +1,12 @@
+{
+ "url": "https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D",
+ "requested_url": "https://edge-e-dcx-downloads-prod-gjf6ega8bmh8crfh.a01.azurefd.net/gbc-api-defintions/swagger-cert.json?sp=r&st=2024-08-29T02:55:48Z&se=2031-08-29T10:55:48Z&spr=https&sv=2022-11-02&sr=b&sig=WAVltmTKe4OKqZWoO5je%2FUMTZSB5%2BdMk8FbgNHR%2FkCU%3D",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 58250,
+ "sha256": "b6627f862d088dffca015436199d929be7a2920992270ab0b53595b0ed09ebdc",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
