@@ -535,6 +535,8 @@ apis:
   - type: X-MCPServerCandidate
     url: mcp/consolidated-edison-mcp.yml
 common:
+- type: Pricing
+  url: https://www.coned.com/en/accounts-billing/share-energy-usage-data/become-a-third-party
 - url: https://www.coned.com/en/about-us/media-center/news
   type: Blog
 - type: AgenticAccess
