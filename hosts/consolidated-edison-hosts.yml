@@ -1,0 +1,68 @@
+generated: '2026-10-13'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 6
+  own: 2
+  other_domain: 2
+  platform: 2
+  roles:
+  - other
+  - source
+  - website
+hosts:
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: investor.conedison.com
+  found_by:
+  - pointer
+  types:
+  - InvestorRelations
+  serves: []
+  registrable_domain: conedison.com
+  role: other
+  relation: own
+- host: www.coned.com
+  found_by:
+  - pointer
+  types:
+  - Subsidiary
+  serves: []
+  registrable_domain: coned.com
+  role: other
+  relation: other-domain
+- host: www.conedison.com
+  found_by:
+  - pointer
+  types:
+  - Website
+  serves: []
+  registrable_domain: conedison.com
+  role: website
+  relation: own
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform
+- host: www.oru.com
+  found_by:
+  - pointer
+  types:
+  - Subsidiary
+  serves: []
+  registrable_domain: oru.com
+  role: other
+  relation: other-domain

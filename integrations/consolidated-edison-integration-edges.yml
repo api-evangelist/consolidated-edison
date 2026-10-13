@@ -1,35 +1,16 @@
-edges:
-- partner_name: Arcadia
-  partner: arcadia-power
-  channel: partner-built
-  direction: partner-built
-  operations:
-  - statements
-  - statement-history
-  - web-navigation
-  - intervals
-  - interval-history
-  contract_reference:
-    list: Arcadia Plug provider coverage (public list)
-    spec_file: null
-    listed_name: Con Edison (ConEd)
-    listed_id: prv_36dc3aa2-ea0a-11e0-b6bb-12313d2b6294
-    matched_domain: coned.com
-    service_types:
-    - Water
-    - Sewer
-    - Lighting
-    - Steam
-    - Electric
-    - Natural Gas
-    detected_by: sweep-energy.py
-    detected: '2026-10-13'
-  type: coverage
-  relationship: system-coverage
-  evidence: https://api.arcadia.com/plug/providers/public
-  detected_by: sweep-energy.py
-  first_seen: '2026-10-13'
 generated: '2026-10-13'
-method: searched
+method: none
+source:
+- https://zapier.com/apps/consolidated-edison/integrations
+- https://n8n.io/integrations/consolidated-edison/
+- https://composio.dev/toolkits/consolidated-edison
+- https://monid.ai/tools/consolidated-edison
 checked:
-- https://api.arcadia.com/plug/providers/public
+- https://composio.dev/toolkits/consolidated-edison
+- https://monid.ai/tools/consolidated-edison
+- https://n8n.io/integrations/consolidated-edison/
+- https://zapier.com/apps/consolidated-edison/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
