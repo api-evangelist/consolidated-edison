@@ -1,4 +1,4 @@
-# Consolidated Edison (consolidated-edison)
+# Consolidated Edison
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,19 +64,123 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Consolidated Edison, Inc. (NYSE: ED) is a Fortune 500 utility holding company headquartered in New York City. It publishes no APIs of its own; it operates through its regulated subsidiaries, principally Consolidated Edison Company of New York (CECONY) and Orange and Rockland Utilities (O&R). The developer surface - Green Button Connect My Data (Share My Data) and Green Button Download My Data, served from coned.com - belongs to CECONY and is profiled at [api-evangelist/con-edison](https://github.com/api-evangelist/con-edison).
+Consolidated Edison, Inc. (NYSE: ED) is a Fortune 500 utility holding company headquartered in New York City. It publishes no APIs of its own; it operates through its regulated subsidiaries, principally Consolidated Edison Company of New York (CECONY), which serves electric, gas and steam customers in New York City and Westchester County, and Orange and Rockland Utilities (O&R), along with Con Edison Transmission. The developer surface - Green Button Connect My Data (Share My Data) and Green Button Download My Data, both served from coned.com - belongs to CECONY and is profiled under the con-edison provider. This profile covers the holding company only.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/consolidated-edison/refs/heads/main/apis.yml)
+**Areas:** Energy · Fortune 500 · Holding Company · New York · Utility
 
-## Common Properties
+## Consolidated Edison on APIs.io
+
+Everything profiled for Consolidated Edison is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/consolidated-edison/](https://apis.io/providers/consolidated-edison/)** — or go straight to one of the APIs or properties below.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Moved to /asyncapis/con-edison/con-edison-batch-notification-webhooks/](https://apis.io/asyncapis/consolidated-edison/consolidated-edison-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [Moved to /servers/con-edison/con-edison-green-button/](https://apis.io/servers/consolidated-edison/consolidated-edison-green-button-connect/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Moved to /agentic-access/con-edison/con-edison-agentic-access/](https://apis.io/agentic-access/consolidated-edison/consolidated-edison-agentic-access/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Moved to /security/con-edison/con-edison-authentication/](https://apis.io/security/consolidated-edison/consolidated-edison-authentication/)
+- [Moved to /security/con-edison/con-edison-domain-security/](https://apis.io/security/consolidated-edison/consolidated-edison-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Moved to /scopes/con-edison/con-edison-scopes/](https://apis.io/scopes/consolidated-edison/consolidated-edison-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Moved to /plans/con-edison/con-edison-plans-pricing/](https://apis.io/plans/consolidated-edison/consolidated-edison-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Moved to /rate-limits/con-edison/con-edison-rate-limits/](https://apis.io/rate-limits/consolidated-edison/consolidated-edison-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Moved to /finops/con-edison/con-edison-finops/](https://apis.io/finops/consolidated-edison/consolidated-edison-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.conedison.com/)
-- [Investor Relations](https://investor.conedison.com)
-- Subsidiary: [Con Edison of New York (coned.com)](https://www.coned.com) - see [con-edison](https://github.com/api-evangelist/con-edison)
-- Subsidiary: [Orange and Rockland Utilities](https://www.oru.com)
+- [GitHub](https://github.com/Con-Edison)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
+**Kin Score 3.9** — minimal · rubric 0.24.0 · scored 2026-10-17
 
-**Email:** kin@apievangelist.com
+| Facet | Score |
+|---|---|
+| Discoverability | 48.2 |
+| Contract quality | 0.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 0.0 |
+| Access clarity | 0.0 |
+
+**Agent readiness 0.0** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 4.9** — Energy & Utilities
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/consolidated-edison/](https://apis.io/providers/consolidated-edison/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Consolidated Edison: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/consolidated-edison/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
